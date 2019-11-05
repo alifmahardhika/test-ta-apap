@@ -12,7 +12,7 @@ C4 - SI Tata Usaha
  --- | --- | ---
 1706984700 | Prissy Azzahra Ratnadwita | TBA
 1706984511 | Alya Isti Safira | TBA
-- | Alif Mahardhika | TBA
+170 | Alif Mahardhika | TBA
 1706043411 | Muhammad Haikal Baihaqi | TBA
 
 
