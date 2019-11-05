@@ -9,6 +9,7 @@ C4 - SI Tata Usaha
 
 ### Kontrak Tahap 1
  NPM | Nama Lengkap | Fitur yang diselesaikan 
+ --- | --- | ---
 1706984700 | Prissy Azzahra Ratnadwita | TBA
 1706984511 | Alya Isti Safira | TBA
 - | Alif Mahardhika | TBA
