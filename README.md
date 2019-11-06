@@ -12,7 +12,7 @@ C4 - SI Tata Usaha
  --- | --- | ---
 1706984700 | Prissy Azzahra Ratnadwita | 6, 7
 1706984511 | Alya Isti Safira | 1, 9
-1706021934 | Alif Mahardhika | 12, 10
+1706021934 | Alif Mahardhika | 12 (50%), 10
 1706043411 | Muhammad Haikal Baihaqi | 4, 5
 
 ### Kontrak Tahap 2
@@ -28,7 +28,7 @@ C4 - SI Tata Usaha
  --- | --- | ---
 1706984700 | Prissy Azzahra Ratnadwita | 8
 1706984511 | Alya Isti Safira | 2, 3
-1706021934 | Alif Mahardhika | 11
+1706021934 | Alif Mahardhika | 11, 12 (50%)
 1706043411 | Muhammad Haikal Baihaqi | 13
 
 
