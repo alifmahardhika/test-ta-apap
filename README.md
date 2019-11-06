@@ -28,7 +28,7 @@ C4 - SI Tata Usaha
  --- | --- | ---
 1706984700 | Prissy Azzahra Ratnadwita | 8
 1706984511 | Alya Isti Safira | 2, 3
-1706021934 | Alif Mahardhika | 11, 12 (50%)
+1706021934 | Alif Mahardhika | 11, 12 (100%)
 1706043411 | Muhammad Haikal Baihaqi | 13
 
 
