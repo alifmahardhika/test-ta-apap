@@ -8,6 +8,10 @@
     </head>
     <body>
         <nav th:replace="fragments/fragment :: navbar"></nav>
-        <div class="col-md-6"><h2>Error! Terdapat nama Jenis Surat yang sama pada Database!</h2></div>
+
+        <div class="container mt-5">
+            <h2 style="color:red"  >Oops!</h2>
+            <p style="color:red" th:text="${alasan}"></p>
+        </div>
       </body>
 </html>
