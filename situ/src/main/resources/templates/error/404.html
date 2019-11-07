@@ -7,6 +7,10 @@
     </head>
     <body>
         <nav th:replace="fragments/fragment :: navbar"></nav>
-        <h2>Error! Halaman tidak ditemukan</h2>
+        <div class="container mt-5">
+            <h2 style="color:red"  >Oops!</h2>
+            <p style="color:red"  >Ada kesalahan internal pada server!</p>
+        </div>
     </body>
+    <footer th:replace="fragments/fragment :: footer"></footer>
 </html>

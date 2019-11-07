@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://thymeLeaf.org">
+<html xmlns:th="http://thymeleaf.org">
     <head>
     <title id="pageTitle">500 Internal Server Error</title>
         <object th:include="fragments/fragment :: css" th:remove="tag"></object>
@@ -7,6 +7,9 @@
     </head>
     <body>
         <nav th:replace="fragments/fragment :: navbar"></nav>
-        <h2>Error! Ada kesalahan internal pada server</h2>
+        <div class="container mt-5">
+            <h2 style="color:red"  >Oops!</h2>
+            <p style="color:red"  >Ada kesalahan internal pada server!</p>
+        </div>
     </body>
 </html>
