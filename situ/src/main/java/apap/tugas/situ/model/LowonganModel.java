@@ -51,12 +51,12 @@ public class LowonganModel implements Serializable {
     //setter and getter
 
 
-    public long getIdRestoran() {
-        return idRestoran;
+    public long getIdLowongan() {
+        return idLowongan;
     }
 
-    public void setIdRestoran(long idRestoran) {
-        this.idRestoran = idRestoran;
+    public void setIdLowongan(long idLowongan) {
+        this.idLowongan = idLowongan;
     }
 
     public String getJudul() {
