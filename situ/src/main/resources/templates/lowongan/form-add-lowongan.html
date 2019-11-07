@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Tambah Lowongan</title>
+    <!-- jquery, ajax, and bootstrap.js -->
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<!--(pageTitle='Tambah Jenis Lowongan')-->
+<nav th:replace="fragments/fragment :: navbar "></nav>
+
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 center">
+            <div class="card">
+                <div class="card-header">Tambah Lowongan Baru</div>
+                <div class="card-body">
+                    <form th:action="@{/lowongan/add}" method="POST">
+                        <label> Judul Lowongan</label>
+                        <input type="text" name="judul" class="form-control"/>
+                        <br>
+
+                        <label> Tanggal Pembukaan Lowongan</label>
+                        <input type="date" name="tanggalDibuka" class="form-control"/>
+                        <br>
+
+                        <label> Tanggal Penutupan Lowongan</label>
+                        <input type="date" name="tanggalDitutup" class="form-control"/>
+                        <br>
+
+                        <label> Keterangan </label>
+                        <input type="text" name="keterangan" class="form-control"/>
+                        <br>
+
+                        <label> Jumlah Lowongan </label>
+                        <input type="number" name="jumlah" class="form-control"/>
+                        <br>
+
+                        <label> Jenis Lowongan</label>
+                        <select name="idJenis" class="form-control" >
+                            <option value="">--Pilih Jenis Lowongan--</option>
+                            <option th:each="jenis : ${listJenis}" th:value="${jenis.idJenisLowongan}" th:text="${jenis.nama}" ></option>
+                        </select>
+                        <br>
+
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+<footer th:replace="fragments/fragment :: footer"></footer>
+</html>
