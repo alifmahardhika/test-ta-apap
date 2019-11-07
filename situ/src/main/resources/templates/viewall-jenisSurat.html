@@ -33,7 +33,7 @@
 					                            <td th:text="${jenisSurat.keterangan}"></td>
 					                          	<td>
 					                          	<div class="form-row col-lg-8">
-					                        		<form class="form-group col-md-3" th:action="@{/jenisSurat/hapus/}+${jenisSurat.idJenisSurat}">
+					                        		<form class="form-group col-md-3" th:action="@{/jenis-surat/delete/}+${jenisSurat.idJenisSurat}">
 					                        			<button class="btn btn-large btn-danger">Hapus</button>
 					                        		</form>
 					                        	</div>
@@ -43,7 +43,7 @@
 					                    </tbody>
 
 					                </table>
-					                <a th:href="@{/jenisSurat/tambah}" class="btn btn-large btn-dark" style="float:right">Tambah Jenis Surat</a>
+					                <a th:href="@{/jenis-surat/add}" class="btn btn-large btn-dark" style="float:right">Tambah Jenis Surat</a>
 					        </div>
                         </div>
                     </div>
