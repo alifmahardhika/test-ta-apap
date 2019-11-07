@@ -1,10 +1,27 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8">
-    <title>Title</title>
+    <title>Beranda</title>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
 </head>
 <body>
+<nav th:replace="fragments/fragment :: navbar(title='SITU')"></nav>
+
+<div class="jumbotron center" id="landing" style="background-color: white">
+    <img th:src="@{/img/business.jpg}" class="image-center" style="height: 200px; width: 360px">
+    <h2 style="color: black; text-align: center; " class="mt-3"><strong>Sistem Informasi Tata Usaha</strong></h2>
+    <div class="container center mt-3">
+        <button class="btn-get-started center">
+            <a th:href="@{/}" style="color: slateblue;"> Yuk, buat surat!</a>
+        </button>
+    </div>
+</div>
+
+
 
 </body>
+
+<footer th:replace="fragments/fragment :: footer"></footer>
 </html>
