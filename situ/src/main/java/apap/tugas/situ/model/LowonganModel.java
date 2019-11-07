@@ -1,6 +1,8 @@
 package apap.tugas.situ.model;
 
 
+import org.springframework.format.annotation.DateTimeFormat;
+
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
@@ -21,10 +23,12 @@ public class LowonganModel implements Serializable {
     private String judul;
 
     @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "tanggalDibuka", nullable = false)
     private LocalDate tanggalDibuka;
 
     @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
     @Column(name = "tanggalDitutup", nullable = false)
     private LocalDate tanggalDitutup;
 
@@ -39,14 +43,15 @@ public class LowonganModel implements Serializable {
 
     //foreign key many to one ke jenis lowongan
     @NotNull
-    @Column(name = "idJenisLowongan", nullable = false)
-    private Long idJenisLowongan;
+    @Column(name = "idJenis", nullable = false)
+    private Long idJenis;
 
     //forign key many to one ke user
-    @NotNull
-    @Size(max = 200)
-    @Column(name = "uuidUser", nullable = false)
-    private String uuidUser;
+    //karena belum implement user maka di comment dulu
+//    @NotNull
+//    @Size(max = 200)
+//    @Column(name = "uuidUser", nullable = false)
+//    private String uuidUser;
 
     //setter and getter
 
@@ -100,18 +105,18 @@ public class LowonganModel implements Serializable {
     }
 
     public Long getIdJenisLowongan() {
-        return idJenisLowongan;
+        return idJenis;
     }
 
     public void setIdJenisLowongan(Long idJenisLowongan) {
-        this.idJenisLowongan = idJenisLowongan;
+        this.idJenis = idJenisLowongan;
     }
 
-    public String getUuidUser() {
-        return uuidUser;
-    }
-
-    public void setUuidUser(String uuidUser) {
-        this.uuidUser = uuidUser;
-    }
+//    public String getUuidUser() {
+//        return uuidUser;
+//    }
+//
+//    public void setUuidUser(String uuidUser) {
+//        this.uuidUser = uuidUser;
+//    }
 }
