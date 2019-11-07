@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymelaf.org">
+<html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Tambah Jenis Lowongan</title>
     <!-- jquery, ajax, and bootstrap.js -->
@@ -7,12 +7,13 @@
     <object th:include="fragments/fragment :: js" th:remove="tag"></object>
 </head>
 <body>
-<nav th:replace="fragments/fragment :: navbar (pageTitle='Tambah Jenis Lowongan')"></nav>
+<!--(pageTitle='Tambah Jenis Lowongan')-->
+<nav th:replace="fragments/fragment :: navbar "></nav>
 
 
-<div class="container-fluid">
+<div class="container mt-5">
     <div class="row">
-        <div class="col-md-6">
+        <div class="col-md-6 center">
             <div class="card">
                 <div class="card-header">Tambah Jenis Lowongan Baru</div>
                 <div class="card-body">
@@ -30,7 +31,9 @@
             </div>
         </div>
     </div>
-
+</div>
 </body>
+
+<footer th:replace="fragments/fragment :: footer"></footer>
 
 </html>
