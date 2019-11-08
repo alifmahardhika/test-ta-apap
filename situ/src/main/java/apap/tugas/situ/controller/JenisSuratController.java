@@ -20,18 +20,18 @@ public class JenisSuratController {
     @Autowired
     private JenisSuratService jenisSuratService;
 
-    @RequestMapping(value = "/jenis-surat", method = RequestMethod.GET)
-    public String home(Model model) {
+    @RequestMapping(value = "/jenis-surat/view-all", method = RequestMethod.GET)
+    public String viewAllJenisSurat(Model model) {
     	List<JenisSuratModel> jenisSuratList = jenisSuratService.getJenisSuratList();
     	model.addAttribute("jenisSuratList", jenisSuratList);
-        return "viewall-jenisSurat";
+        return "jenis-surat/viewall-jenisSurat";
     }
     
     @RequestMapping(value = "/jenis-surat/add", method = RequestMethod.GET)
     public String addJenisSuratFormPage(Model model) {
         JenisSuratModel jenisSurat = new JenisSuratModel();
         model.addAttribute("jenisSurat", jenisSurat);
-        return "form-add-jenisSurat";
+        return "jenis-surat/form-add-jenisSurat";
     }
     
     @RequestMapping(value = "/jenis-surat/add", method = RequestMethod.POST)
@@ -39,7 +39,7 @@ public class JenisSuratController {
     	if (jenisSuratService.checkJenisSurat(jenisSurat.getNama()) == true) {
 	    	jenisSuratService.addJenisSurat(jenisSurat);
 	        model.addAttribute("jenisSurat", jenisSurat);
-	        return "add-jenisSurat";
+	        return "jenis-surat/add-jenisSurat";
     	} else {
     	    model.addAttribute("alasan", "Error! Terdapat nama Jenis Surat yang sama pada Database!");
     		return "error";
@@ -52,6 +52,6 @@ public class JenisSuratController {
     	JenisSuratModel jenisSurat = jenisSuratService.getJenisSuratByIdJenisSurat(idJenisSurat).get();
         jenisSuratService.deleteJenisSurat(idJenisSurat);
         model.addAttribute("namaSurat", jenisSurat.getNama());
-        return "hapus-jenisSurat";
+        return "jenis-surat/hapus-jenisSurat";
     }   
 }
