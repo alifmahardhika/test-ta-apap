@@ -68,7 +68,16 @@
                    aria-haspopup="true" aria-expanded="false">Jenis Lowongan</a>
                 <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" th:href="@{/jenis-lowongan/add}">Tambah</a>
+                    <a class="dropdown-item" th:href="@{/jenis-lowongan/view-all}">Lihat Semua</a>
+                </div>
+            </li>
 
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">Lowongan</a>
+                <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" th:href="@{/lowongan/add}">Tambah</a>
+                    <a class="dropdown-item" th:href="@{/lowongan/view-all}">Lihat Semua</a>
                 </div>
             </li>
 
@@ -77,7 +86,26 @@
                    aria-haspopup="true" aria-expanded="false">Jenis Surat</a>
                 <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
                     <a class="dropdown-item" th:href="@{/jenis-surat/add}">Tambah</a>
-                    <a class="dropdown-item" th:href="@{/jenis-surat}">Lihat Semua</a>
+                    <a class="dropdown-item" th:href="@{/jenis-surat/view-all}">Lihat Semua</a>
+                </div>
+            </li>
+
+            <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false">Pengajuan Surat</a>
+                <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" th:href="@{/pengajuan-surat/add}">Tambah</a>
+                    <a class="dropdown-item" th:href="@{/pengajuan-surat/view-all}">Lihat Semua</a>
+                </div>
+            </li>
+
+            <li class="nav-item dropdown pull-right">
+                <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
+                   aria-haspopup="true" aria-expanded="false" th:text=" 'Hello ' + ${#httpServletRequest.remoteUser} + ' !'">Profil</a>
+                <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="nav-link" th:href="@{/admin}">Halaman Admin</a>
+                    <a class="nav-item nav-link active" th:href="@{/user/update-password/{username} (username=${#httpServletRequest.remoteUser})}"> Update Password <span class="sr-only"></span> </a>
+                    <a class="nav-item nav-link active" th:href="@{/logout}">Logout</a>
                 </div>
             </li>
 
