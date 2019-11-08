@@ -1,7 +1,8 @@
-package apap.tutorial.gopud.service;
+package apap.tugas.situ.service;
 
-import apap.tutorial.gopud.model.UserModel;
-import apap.tutorial.gopud.repository.UserDB;
+
+import apap.tugas.situ.model.UserModel;
+import apap.tugas.situ.repository.UserDb;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
@@ -10,13 +11,14 @@ import org.springframework.stereotype.Service;
 public class UserServiceImpl implements UserService {
 
     @Autowired
-    private UserDB userDB;
+    private UserDb userDb;
 
     @Override
     public UserModel addUser(UserModel user){
         String pass = encrypt(user.getPassword());
         user.setPassword(pass);
-        return userDB.save(user);
+        System.out.println("di user service impl yang adduser masuk");
+        return userDb.save(user);
     }
 
     @Override
@@ -28,7 +30,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public UserModel getUser(String username) {
-        return userDB.findByUsername(username);
+        return userDb.findByUsername(username);
     }
 
     @Override
@@ -39,10 +41,10 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void updatePassword(String username, String newpass) {
-        UserModel user = userDB.findByUsername(username);
+        UserModel user = userDb.findByUsername(username);
         String newpassencrypt = encrypt(newpass);
         user.setPassword(newpassencrypt);
-        userDB.save(user);
+        userDb.save(user);
 
     }
 }

@@ -1,7 +1,7 @@
-package apap.tutorial.gopud.service;
+package apap.tugas.situ.service;
 
-import apap.tutorial.gopud.model.UserModel;
 
+import apap.tugas.situ.model.UserModel;
 
 public interface UserService {
 

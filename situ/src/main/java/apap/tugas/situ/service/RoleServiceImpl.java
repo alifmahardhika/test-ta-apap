@@ -1,8 +1,8 @@
-package apap.tutorial.gopud.service;
+package apap.tugas.situ.service;
 
-import apap.tutorial.gopud.model.MenuModel;
-import apap.tutorial.gopud.model.RoleModel;
-import apap.tutorial.gopud.repository.RoleDB;
+import apap.tugas.situ.model.RoleModel;
+import apap.tugas.situ.repository.RoleDb;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,10 +12,10 @@ import java.util.List;
 public class RoleServiceImpl implements RoleService{
 
     @Autowired
-    RoleDB roleDB;
+    RoleDb roleDb;
 
     @Override
     public List<RoleModel> findAll(){
-        return roleDB.findAll();
+        return roleDb.findAll();
     }
 }
