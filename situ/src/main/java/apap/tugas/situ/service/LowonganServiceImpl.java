@@ -26,4 +26,14 @@ public class LowonganServiceImpl implements LowonganService {
     public LowonganModel findLowonganById(Long idLowongan){
         return lowonganDb.findById(idLowongan).get();
     }
+
+    @Override
+    public void changeJumlahLowongan (Long idLowongan, Integer jumlah){
+        LowonganModel target = findLowonganById(idLowongan);
+        target.setJumlah(jumlah);
+        System.out.println("==================================");
+        System.out.println(jumlah);
+        System.out.println(target.getJumlah());
+        lowonganDb.save(target);
+    }
 }

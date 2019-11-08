@@ -24,11 +24,11 @@ public class JenisLowonganModel implements Serializable {
 
     //Setter and getter
 
-    public long getIdJenisLowongan() {
+    public long getIdJenis() {
         return idJenisLowongan;
     }
 
-    public void setIdJenisLowongan(long idJenisLowongan) {
+    public void setIdJenis(long idJenisLowongan) {
         this.idJenisLowongan = idJenisLowongan;
     }
 
