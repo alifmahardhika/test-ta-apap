@@ -31,6 +31,6 @@ public class PengajuanSuratServiceImpl implements PengajuanSuratService {
 
     @Override
     public void deletePengajuanSurat(PengajuanSuratModel pengajuanSuratModel) {
-
+        psdb.delete(pengajuanSuratModel);
     }
 }

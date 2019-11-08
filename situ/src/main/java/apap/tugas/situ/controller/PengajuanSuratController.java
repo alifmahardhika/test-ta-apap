@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
@@ -47,4 +48,24 @@ public class PengajuanSuratController {
         model.addAttribute("list", listPengajuanSurat);
         return "pengajuan-surat/view-pengajuan-surat";
     }
+
+    @RequestMapping(value = "/pengajuan-surat/delete/{idPengajuanSurat}", method = RequestMethod.GET)
+    public String deleteJenisSurat(@PathVariable Long idPengajuanSurat,
+                                   Model model) {
+        List<PengajuanSuratModel> pengajuanSurat = pengajuanSuratService.getPengajuanSuratList();
+
+        for (PengajuanSuratModel surat : pengajuanSurat){
+            if(surat.getId().equals(idPengajuanSurat)){
+                System.out.println("masuk ke if oi");
+                pengajuanSuratService.deletePengajuanSurat(surat);
+                model.addAttribute("noSurat", surat.getId());
+            }
+        }
+
+//        model.addAttribute("alasan", "Pengajuan Surat berhasil dihapus." );
+
+
+        return "pengajuan-surat/hapus-pengajuanSurat";
+    }
 }
+
