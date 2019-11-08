@@ -63,3 +63,5 @@ public class JenisLowonganServiceImpl implements JenisLowonganService{
         return true;
     }
 }
+
+
