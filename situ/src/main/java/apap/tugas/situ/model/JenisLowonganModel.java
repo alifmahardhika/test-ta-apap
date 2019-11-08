@@ -11,7 +11,7 @@ public class JenisLowonganModel implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long idJenisLowongan;
+    private long idJenis;
 
     @NotNull
     @Size(max = 200)
@@ -25,11 +25,11 @@ public class JenisLowonganModel implements Serializable {
     //Setter and getter
 
     public long getIdJenis() {
-        return idJenisLowongan;
+        return idJenis;
     }
 
-    public void setIdJenis(long idJenisLowongan) {
-        this.idJenisLowongan = idJenisLowongan;
+    public void setIdJenis(long idJenis) {
+        this.idJenis = idJenis;
     }
 
     public String getNama() {

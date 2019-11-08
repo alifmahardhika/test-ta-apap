@@ -41,7 +41,7 @@
                         <label> Jenis Lowongan</label>
                         <select name="idJenis" class="form-control" >
                             <option value="">--Pilih Jenis Lowongan--</option>
-                            <option th:each="jenis : ${listJenis}" th:value="${jenis.idJenisLowongan}" th:text="${jenis.nama}" ></option>
+                            <option th:each="jenis : ${listJenis}" th:value="${jenis.idJenis}" th:text="${jenis.nama}" ></option>
                         </select>
                         <br>
 

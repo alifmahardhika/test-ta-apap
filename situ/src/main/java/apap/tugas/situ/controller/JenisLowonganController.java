@@ -7,8 +7,11 @@ import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+
+import java.util.List;
 
 @Controller
 public class JenisLowonganController {
@@ -35,6 +38,30 @@ public class JenisLowonganController {
 
         model.addAttribute("namaJenis", jenisLowonganModel.getNama());
         return "add-jenis-lowongan-fail";
+    }
+
+    @RequestMapping(value = "/jenis-lowongan/delete/{idJenis}")
+    public String deleteJenis(@PathVariable Long idJenis, Model model) {
+        JenisLowonganModel target = jenisLowonganService.findJenisById(idJenis);
+        List<JenisLowonganModel> allJenis = jenisLowonganService.findAllJenis();
+        model.addAttribute("listJenis", allJenis);
+
+        if (jenisLowonganService.checkDeletable(target)){
+            model.addAttribute("namaJenis", target.getNama());
+            jenisLowonganService.deleteJenis(target);
+            return "jenisLowongan/delete-sukses";
+        }
+        else{
+            model.addAttribute("namaJenis", target.getNama());
+            return "error/gagal-delete-jenis-punya-relasi";
+        }
+    }
+
+    @RequestMapping(value = "jenis-lowongan/view-all", method = RequestMethod.GET)
+    public String viewAll(Model model) {
+        List<JenisLowonganModel> allJenis = jenisLowonganService.findAllJenis();
+        model.addAttribute("listJenis", allJenis);
+        return "jenisLowongan/viewAll";
     }
 
 }

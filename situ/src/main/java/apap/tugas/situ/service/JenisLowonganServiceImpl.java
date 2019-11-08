@@ -1,7 +1,9 @@
 package apap.tugas.situ.service;
 
 import apap.tugas.situ.model.JenisLowonganModel;
+import apap.tugas.situ.model.LowonganModel;
 import apap.tugas.situ.repository.JenisLowonganDb;
+import apap.tugas.situ.repository.LowonganDb;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -12,6 +14,9 @@ public class JenisLowonganServiceImpl implements JenisLowonganService{
 
     @Autowired
     JenisLowonganDb jenisLowonganDb;
+
+    @Autowired
+    LowonganDb lowonganDb;
 
     @Override
     public void addJenisLowongan(JenisLowonganModel jenisLowonganModel){
@@ -43,7 +48,18 @@ public class JenisLowonganServiceImpl implements JenisLowonganService{
     }
 
     @Override
-    public void deleteJenis(JenisLowonganModel jenisLowonganModel){
-        jenisLowonganDb.delete(jenisLowonganModel);
+    public void deleteJenis(JenisLowonganModel jenisLowongan){
+        jenisLowonganDb.delete(jenisLowongan);
+    }
+
+    @Override
+    public Boolean checkDeletable(JenisLowonganModel jenisLowongan){
+        List<LowonganModel> listLowongan = lowonganDb.findAll();
+        for (LowonganModel lowongan:listLowongan){
+            if (lowongan.getIdJenis() == jenisLowongan.getIdJenis()){
+                return false;
+            }
+        }
+        return true;
     }
 }
