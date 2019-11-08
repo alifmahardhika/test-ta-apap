@@ -9,10 +9,8 @@
     <body>
         <nav th:replace="fragments/fragment :: navbar"></nav>
         <div class="container mt-5" style="background-color: white">
-            <h2 th:text="'Sukses!'" style="text-align: center;"></h2>
-            <p th:text="'Jenis Surat dengan nama ' + ${namaSurat} + ' berhasil dihapus.'" style="text-align: center;"></p>
+            <h2 style="text-align: center;">Sukses!</h2>
             <p th:text="'Pengajuan Surat berhasil dihapus.'" style="text-align: center;"></p>
-            <h2 th:text="${alasan} != null ? ${alasan}" style="text-align: center;"></h2>
         </div>
       </body>
 </html>

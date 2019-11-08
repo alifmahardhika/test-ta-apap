@@ -20,6 +20,7 @@
                 <th>Tanggal Pengajuan</th>
                 <th>Tanggal Disetujui</th>
                 <th>Status</th>
+                <th></th>
             </tr>
         </thead>
         <tbody>
@@ -37,9 +38,21 @@
                     <p th:case="3">Diproses</p>
                     <p th:case="4">Menunggu persetujuan</p>
                 </td>
+                <td style="white-space: nowrap;">
+                    <div class="row" style="width:100%">
+
+                        <div class="col-sm-2">
+                            <a th:href="@{/pengajuan-surat/delete/} + ${surat.id}">
+                                <button type="button" class="btn btn-sm btn-warning">Delete</button>
+                            </a>
+                        </div>
+
+                    </div>
+                </td>
             </tr>
         </tbody>
     </table>
+    <a th:href="@{/pengajuan-surat/add}" class="btn btn-large btn-dark" style="float:right">Tambah Pengajuan Surat</a>
 </div>
 <footer th:replace="fragments/fragment :: footer"></footer>
 </body>

@@ -8,9 +8,12 @@
 </head>
 <body>
 <nav th:replace="fragments/fragment :: navbar"></nav>
-<div class="jumbotron">
-    <h1 class="m-4 font-weight-bold" style="font-size: x-large">Berhasil!</h1>
-    <p>Pengajuan surat berhasil ditambahkan.</p>
+
+<div class="container mt-5">
+    <h2 th:text="'Sukses!'" style="text-align: center;" class="font-weight-bold"></h2>
+    <p th:text="'Pengajuan Surat berhasil ditambahkan.'" style="text-align: center;"></p>
+    <a th:href="@{/pengajuan-surat/view-all}" class="mt-3" style="color: slateblue; text-align: center">Lihat seluruh Pengajuan Surat</a>
 </div>
+<footer th:replace="fragments/fragment :: footer"></footer>
 </body>
 </html>
