@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface JenisLowonganDb extends JpaRepository<JenisLowonganModel, Long> {
     List<JenisLowonganModel> findAll();
-    JenisLowonganModel getJenisLowonganByIdJenisLowongan(Long idJenisLowongan);
+    JenisLowonganModel getJenisLowonganByIdJenis(Long idJenis);
 
 }
