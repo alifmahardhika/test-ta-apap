@@ -41,4 +41,9 @@ public class JenisLowonganServiceImpl implements JenisLowonganService{
         }
         return true;
     }
+
+    @Override
+    public void deleteJenis(JenisLowonganModel jenisLowonganModel){
+        jenisLowonganDb.delete(jenisLowonganModel);
+    }
 }

@@ -1,23 +1,19 @@
 <!DOCTYPE html>
 <html xmlns:th="http://thymeLeaf.org">
-
 <head>
-    <title>View All Pasien</title>
+    <title> Daftar Lowongan </title>
     <object th:include="fragments/fragment :: css" th:remove="tag"></object>
     <object th:include="fragments/fragment :: js" th:remove="tag"></object>
-</head>
 
+</head>
 <body>
-<nav th:replace="fragments/fragment :: navbar (pageTitle='Beranda')"></nav>
+<!--(pageTitle='Add Jenis Lowongan')-->
+<nav th:replace="fragments/fragment :: navbar"></nav>
 <br>
-<h2 style="text-align:center">Sistem Informasi Pasien</h2>
-<button class ="btn btn-primary">
-    <a th:href="@{pasien/tambah}" style="color: white">Tambah Pasien Baru</a>
-</button>
 
 <br>
 <div class="card-header bg bg-dark">
-    <p style="color: white; size: 12px;">Daftar Pasien</p>
+    <p style="color: white; size: 12px;">Daftar Lowongan</p>
 </div>
 
 
@@ -31,7 +27,7 @@
             <th scope="col">Tanggal Dibuka</th>
             <th scope="col">Tanggal Ditutup</th>
             <th scope="col">Jumlah</th>
-            <th scope="col">Jenis Lowongan</th></th>
+            <!--<th scope="col">Jenis Lowongan</th></th>-->
             <th scope="col"></th>
 
         </tr>
@@ -44,7 +40,7 @@
             <td th:text="${lowongan.tanggalDibuka}"></td>
             <td th:text="${lowongan.tanggalDitutup}"></td>
             <td th:text="${lowongan.jumlah}"></td>
-            <td th:text="${lowongan.getIdJenis()}"></td>
+            <!--<td th:text="${lowongan.getIdJenis()}"></td>-->
             <td style="white-space: nowrap;">
                 <div class="row" style="width:100%">
 
