@@ -8,4 +8,5 @@ public interface LowonganService {
     void addLowongan(LowonganModel lowonganModel);
     List<LowonganModel> findAllLowongan();
     LowonganModel findLowonganById(Long idLowongan);
+    void changeJumlahLowongan (Long idLowongan, Integer jumlah);
 }

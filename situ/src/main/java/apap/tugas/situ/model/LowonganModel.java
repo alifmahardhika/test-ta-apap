@@ -104,11 +104,11 @@ public class LowonganModel implements Serializable {
         this.jumlah = jumlah;
     }
 
-    public Long getIdJenisLowongan() {
+    public Long getIdJenis() {
         return idJenis;
     }
 
-    public void setIdJenisLowongan(Long idJenisLowongan) {
+    public void setIdJenis(Long idJenisLowongan) {
         this.idJenis = idJenisLowongan;
     }
 
