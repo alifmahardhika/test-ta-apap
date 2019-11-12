@@ -26,7 +26,7 @@ public class UserDetailsServiceImpl implements UserDetailsService {
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException{
         UserModel user = userDb.findByUsername(username);
         Set<GrantedAuthority> grantedAuthorities = new HashSet<GrantedAuthority>();
-        grantedAuthorities.add(new SimpleGrantedAuthority(user.getRole().getRole()));
+        grantedAuthorities.add(new SimpleGrantedAuthority(user.getRole().getNama()));
         return new User(user.getUsername(), user.getPassword(), grantedAuthorities);
     }
 }
