@@ -21,9 +21,9 @@ public class RoleModel {
     private Long id;
 
     @NotNull
-    @Size(max = 50)
-    @Column(name="role", nullable = false)
-    private String role;
+    @Size(max = 200)
+    @Column(name="nama", nullable = false)
+    private String nama;
 
     @OneToMany(mappedBy = "role", fetch = FetchType.LAZY)
     @OnDelete(action = OnDeleteAction.CASCADE)
@@ -38,12 +38,12 @@ public class RoleModel {
         this.id = id;
     }
 
-    public String getRole() {
-        return role;
+    public String getNama() {
+        return nama;
     }
 
-    public void setRole(String role) {
-        this.role = role;
+    public void setNama(String nama) {
+        this.nama = nama;
     }
 
     public List<UserModel> getUserRole() {
