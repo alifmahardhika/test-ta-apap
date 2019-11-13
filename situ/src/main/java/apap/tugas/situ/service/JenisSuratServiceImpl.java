@@ -45,12 +45,12 @@ public class JenisSuratServiceImpl implements JenisSuratService {
     	}
     	
     	for (JenisSuratModel a : temp) {
-	    	if (!nama.equals(a.getNama())) {
-	    		return true;
+	    	if (nama.equals(a.getNama())) {
+	    		return false;
 	    	}
     	}
     	
-	    return false;
+	    return true;
     }
     
     @Override
