@@ -34,6 +34,12 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public UserModel getUserById(String uuid) {
+        return userDb.findById(uuid);
+    }
+
+
+    @Override
     public Boolean validatePassword(String oldpass, String oldpasscoba) {
         BCryptPasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         return passwordEncoder.matches(oldpasscoba, oldpass);

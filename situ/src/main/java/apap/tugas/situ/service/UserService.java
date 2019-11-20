@@ -9,6 +9,7 @@ public interface UserService {
     public String encrypt(String password);
 
     UserModel getUser(String username);
+    UserModel getUserById(String uuid);
 
     Boolean validatePassword(String oldpass, String oldpasscoba);
 
