@@ -1,9 +1,15 @@
 package apap.tugas.situ.controller;
 
 
+import apap.tugas.situ.model.RoleModel;
 import apap.tugas.situ.model.UserModel;
+import apap.tugas.situ.rest.PegawaiDetail;
+import apap.tugas.situ.service.RoleService;
+import apap.tugas.situ.service.UserRestService;
 import apap.tugas.situ.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.ModelAttribute;
@@ -11,12 +17,22 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.List;
+import java.util.Map;
+
 @Controller
 @RequestMapping("/user")
 public class UserController {
 
     @Autowired
     private UserService userService;
+
+    @Autowired
+    private UserRestService userRestService;
+
+    @Autowired
+    RoleService roleService;
+
 
 //    @RequestMapping(value = "/addUser", method = RequestMethod.POST)
 //    private String addUserSubmit(@ModelAttribute UserModel user){
@@ -97,4 +113,48 @@ public class UserController {
 //        }
 //
 //    }
+
+
+
+//    @RequestMapping(value = "/profil", method = RequestMethod.GET)
+//    public String viewUser(Authentication authentication, Model model){
+//
+//        List<RoleModel> listRole = roleService.findAll();
+//        UserModel user = userService.getUser(authentication.getName());
+//        PegawaiDetail pegawai;
+//
+//        if(user.getRole().getId().equals(2L)){
+//            pegawai = userRestService.getPegawai(user.getId()).block();
+//            model.addAttribute("pegawai", pegawai);
+//            model.addAttribute("sisivitas", pegawai.getNama());
+//            System.out.println("masuk kok ke if dalem");
+//        }
+//
+//        model.addAttribute("user", user);
+//        System.out.println("masuk kok ke controller profil");
+//        return "view-user-profile";
+//    }
+
+    @RequestMapping(value = "/profil", method = RequestMethod.GET)
+    public String viewUser(Model model){
+
+        List<RoleModel> listRole = roleService.findAll();
+        UserModel user = userService.getUser(SecurityContextHolder.getContext().getAuthentication().getName());
+        String userId = user.getId();
+        Map<String, String> pegawai = userRestService.getPegawai(userId);
+
+        if(pegawai != null){
+            model.addAttribute("pegawai", pegawai);
+            model.addAttribute("sisivitas", "Ada");
+            System.out.println("masuk kok ke if dalem");
+        } else {
+            model.addAttribute("pegawai", user);
+        }
+
+        model.addAttribute("user", user);
+        System.out.println("masuk kok ke controller profil");
+        return "view-user-profile";
+    }
+
+
 }
