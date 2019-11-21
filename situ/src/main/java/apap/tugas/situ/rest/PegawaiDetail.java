@@ -9,7 +9,7 @@ import javax.validation.constraints.Size;
 import java.util.Date;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class UserDTO {
+public class PegawaiDetail {
 
     @Id
     @NotNull
@@ -40,9 +40,6 @@ public class UserDTO {
     @Size(max=200)
     private String telepon;
 
-    private String username;
-
-    private String password
 
     public String getNip() {
         return nip;
@@ -76,11 +73,11 @@ public class UserDTO {
         this.tempatLahir = tempatLahir;
     }
 
-    public String getTanggalLahir() {
+    public Date getTanggalLahir() {
         return tanggalLahir;
     }
 
-    public void setTanggalLahir(String tanggalLahir) {
+    public void setTanggalLahir(Date tanggalLahir) {
         this.tanggalLahir = tanggalLahir;
     }
 
