@@ -1,24 +1,48 @@
 package apap.tugas.situ.rest;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import org.springframework.format.annotation.DateTimeFormat;
+
+import javax.persistence.Id;
+import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Size;
+import java.util.Date;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class PegawaiDetail {
+public class UserDTO {
 
-    @JsonIgnoreProperties("idUser")
+    @Id
+    @NotNull
+    @Size(max=32, min=32)
     private Long idUser;
 
+    @NotNull
+    @Size(max=200)
     private String nip;
 
+    @NotNull
+    @Size(max=200)
     private String nama;
 
+    @NotNull
+    @Size(max=200)
     private String tempatLahir;
 
-    private String tanggalLahir;
+    @NotNull
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private Date tanggalLahir;
 
+    @NotNull
+    @Size(max=200)
     private String alamat;
 
+    @NotNull
+    @Size(max=200)
     private String telepon;
+
+    private String username;
+
+    private String password
 
     public String getNip() {
         return nip;
