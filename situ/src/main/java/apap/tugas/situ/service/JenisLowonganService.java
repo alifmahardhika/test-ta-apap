@@ -12,5 +12,6 @@ public interface JenisLowonganService {
     Boolean checkValid(String namaJenis);
     void deleteJenis(JenisLowonganModel jenisLowonganModel);
     Boolean checkDeletable(JenisLowonganModel jenisLowongan);
+    long findIdByNama(String nama);
 
 }

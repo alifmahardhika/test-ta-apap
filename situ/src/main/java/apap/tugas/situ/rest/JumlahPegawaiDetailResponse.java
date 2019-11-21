@@ -8,8 +8,8 @@ public class JumlahPegawaiDetailResponse {
     @JsonProperty("status")
     private String status;
 
-    @JsonProperty("message")
-    private String message;
+    @JsonProperty("messages")
+    private String messages;
 
     @JsonProperty("result")
     private JumlahPegawaiDetail result;
@@ -22,12 +22,12 @@ public class JumlahPegawaiDetailResponse {
         this.status = status;
     }
 
-    public String getMessage() {
-        return message;
+    public String getMessages() {
+        return messages;
     }
 
-    public void setMessage(String message) {
-        this.message = message;
+    public void setMessages(String message) {
+        this.messages = message;
     }
 
     public JumlahPegawaiDetail getResult() {
@@ -36,5 +36,14 @@ public class JumlahPegawaiDetailResponse {
 
     public void setResult(JumlahPegawaiDetail result) {
         this.result = result;
+    }
+
+    @Override
+    public String toString() {
+        return "JumlahPegawaiDetailResponse{" +
+                "status='" + status + '\'' +
+                ", message='" + messages + '\'' +
+                ", result=" + result +
+                '}';
     }
 }
