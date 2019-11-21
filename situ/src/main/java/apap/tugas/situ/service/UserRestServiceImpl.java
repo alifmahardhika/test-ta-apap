@@ -1,13 +1,13 @@
 package apap.tugas.situ.service;
 
+import apap.tugas.situ.rest.BaseResponse;
 import apap.tugas.situ.rest.PegawaiDetail;
 import apap.tugas.situ.rest.Setting;
-import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
-import javax.transaction.Transactional;
+import java.util.Map;
 import java.util.Random;
 @Service
 public class UserRestServiceImpl implements UserRestService {
@@ -42,11 +42,25 @@ public class UserRestServiceImpl implements UserRestService {
         this.webClient = webClientBuilder.baseUrl(Setting.sivitasUrl).build();
     }
 
+//    @Override
+//    public Mono<PegawaiDetail> getPegawai(String uuid) {
+//        try {
+//            return this.webClient.get().uri("/employees/" + uuid)
+//                    .retrieve().bodyToMono(PegawaiDetail.class);
+//        }
+//        catch (NullPointerException e){
+//            return null;
+//        }
+//    }
+
     @Override
-    public Mono<PegawaiDetail> getPegawai(String uuid) {
-        return this.webClient.get().uri("/employees/" + uuid)
-                .retrieve().bodyToMono(PegawaiDetail.class);
-
+    public Map<String, String> getPegawai(String uuid) {
+        try {
+            return this.webClient.get().uri("/employees/" + uuid)
+                    .retrieve().bodyToMono(Map.class).block();
+        }
+        catch (NullPointerException e){
+            return null;
+        }
     }
-
 }
