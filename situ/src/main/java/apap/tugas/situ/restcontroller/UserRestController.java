@@ -7,15 +7,11 @@ import apap.tugas.situ.service.RoleService;
 import apap.tugas.situ.service.UserRestService;
 import apap.tugas.situ.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
-import org.springframework.web.server.ResponseStatusException;
-import reactor.core.publisher.Mono;
 
 import java.util.List;
-import java.util.NoSuchElementException;
 
 @RestController
 @RequestMapping("/api")
@@ -51,23 +47,5 @@ public class UserRestController {
 //        System.out.println(userRest.block());
 //        return "userDetail";
 //    }
-
-    @RequestMapping(value = "/profil", method = RequestMethod.GET)
-    public String viewUser(Authentication authentication, Model model){
-
-        List<RoleModel> listRole = roleService.findAll();
-        UserModel user = userService.getUser(authentication.getName());
-        PegawaiDetail pegawai;
-
-        if(user.getRole().getId().equals(2L)){
-            pegawai = userRestService.getPegawai(user.getId()).block();
-            model.addAttribute("pegawai", pegawai);
-            model.addAttribute("sisivitas", pegawai.getNama());
-        }
-
-        model.addAttribute("user", user);
-        return "view-user-profile";
-    }
-
 
 }
