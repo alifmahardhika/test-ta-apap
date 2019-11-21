@@ -7,50 +7,86 @@
 </head>
 <body>
 <nav th:replace="fragments/fragment :: navbar"></nav>
-
 <div class="row justify-content-center" style="margin-top: 100px; margin-bottom: 60px">
     <div class="col-md-8">
         <div class="card">
             <h4 class="card-header bg-dark text-white" style="margin-bottom:20px; text-align: center;" th:text="'My Profile'"><b></b></h4>
             <div class="card-body">
-                <table class="table" style="width:100%">
-                    <tbody>
-                    <tr th:if="${sisivitas == null}">
-                        <td>Username</td>
-                        <td th:text="${user.username}"></td>
-                    </tr>
-                    <tr th:if="${sisivitas != null}">
-                        <td>Nama</td>
-                        <td th:text="${pegawai} != null ? ${pegawai.nama}"></td>
+                <!--<table class="table" style="width:100%">-->
+                    <!--<tbody>-->
+                    <!--<tr th:if="${sisivitas == null}">-->
+                        <!--<td>Username</td>-->
+                        <!--<td th:text="${user.username}"></td>-->
+                    <!--</tr>-->
+                    <!--<tr th:if="${sisivitas != null}">-->
+                        <!--<td>Nama</td>-->
+                        <!--<td th:text="${pegawai} != null ? ${pegawai.nama}"></td>-->
+                    <!--</tr>-->
+                    <!--<tr>-->
+                        <!--<td>Role</td>-->
+                        <!--<td th:text="${user.getRole().getNama()}"></td>-->
+                    <!--</tr>-->
+                    <!--<tr th:if="${sisivitas != null}">-->
+                        <!--&lt;!&ndash;<td th:text="${pegawai} != null ? 'NIG' : 'NIS'"></td>&ndash;&gt;-->
+                        <!--<td th:text="${pegawai} != null ? ${pegawai.nip}"></td>-->
+
+                    <!--</tr>-->
+                    <!--<tr th:if="${sisivitas != null}">-->
+                        <!--<td>Tempat Lahir</td>-->
+                        <!--<td th:text="${pegawai} != null ? ${pegawai.tempatLahir}"></td>-->
+                    <!--</tr>-->
+                    <!--<tr th:if="${sisivitas != null}">-->
+                        <!--<td>Tanggal Lahir</td>-->
+                        <!--<td th:text="${pegawai} != null ? ${#dates.format(new java.util.Date(pegawai.tanggalLahir), 'dd-MM-yyyy')}"></td>-->
+                    <!--</tr>-->
+                    <!--<tr th:if="${sisivitas != null}">-->
+                        <!--<td>Alamat</td>-->
+                        <!--<td th:text="${pegawai} != null ? ${pegawai.alamat}"></td>-->
+
+                    <!--</tr>-->
+                    <!--<tr th:if="${sisivitas != null}">-->
+                        <!--<td>Telepon</td>-->
+                        <!--<td th:text="${pegawai} != null ? ${pegawai.telepon}"></td>-->
+
+                    <!--</tr>-->
+                    <!--</tbody>-->
+                <!--</table>-->
+
+                <table class="table" th:if="${sisivitas != null}">
+                    <tr>
+                        <td>Nama:</td>
+                        <td th:text="${pegawai.get('result').get('nama')}"></td>
                     </tr>
                     <tr>
-                        <td>Role</td>
-                        <td th:text="${user.getRole().getNama()}"></td>
+                        <td>NIP:</td>
+                        <td th:text="${pegawai.get('result').get('nip')}"></td>
                     </tr>
-                    <tr th:if="${sisivitas != null}">
-                        <!--<td th:text="${pegawai} != null ? 'NIG' : 'NIS'"></td>-->
-                        <td th:text="${pegawai} != null ? ${pegawai.nip}"></td>
-
+                    <tr>
+                        <td>Tempat Lahir:</td>
+                        <td th:text="${pegawai.get('result').get('tempatLahir')}"></td>
                     </tr>
-                    <tr th:if="${sisivitas != null}">
-                        <td>Tempat Lahir</td>
-                        <td th:text="${pegawai} != null ? ${pegawai.tempatLahir}"></td>
+                    <tr>
+                        <td>Tanggal Lahir:</td>
+                        <td th:text="${pegawai.get('result').get('tanggalLahir')}"></td>
                     </tr>
-                    <tr th:if="${sisivitas != null}">
-                        <td>Tanggal Lahir</td>
-                        <td th:text="${pegawai} != null ? ${#dates.format(new java.util.Date(pegawai.tanggalLahir), 'dd-MM-yyyy')}"></td>
+                    <tr>
+                        <td>Alamat:</td>
+                        <td th:text="${pegawai.get('result').get('alamat')}"></td>
                     </tr>
-                    <tr th:if="${sisivitas != null}">
-                        <td>Alamat</td>
-                        <td th:text="${pegawai} != null ? ${pegawai.alamat}"></td>
-
+                    <tr>
+                        <td>Telepon:</td>
+                        <td th:text="${pegawai.get('result').get('telepon')}"></td>
                     </tr>
-                    <tr th:if="${sisivitas != null}">
-                        <td>Telepon</td>
-                        <td th:text="${pegawai} != null ? ${pegawai.telepon}"></td>
-
+                </table>
+                <table class="table" th:unless="${sisivitas != null}">
+                    <tr>
+                        <td>Nama:</td>
+                        <td th:text="${pegawai.nama}"></td>
                     </tr>
-                    </tbody>
+                    <tr>
+                        <td>Role:</td>
+                        <td th:text="${pegawai.role}"></td>
+                    </tr>
                 </table>
             </div>
         </div>
