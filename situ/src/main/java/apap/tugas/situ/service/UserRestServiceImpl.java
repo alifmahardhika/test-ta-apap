@@ -1,9 +1,23 @@
 package apap.tugas.situ.service;
 
+
+import apap.tugas.situ.model.UserModel;
+import apap.tugas.situ.rest.GuruDetail;
+import apap.tugas.situ.rest.GuruDetailResponse;
+
 import apap.tugas.situ.rest.BaseResponse;
+
 import apap.tugas.situ.rest.PegawaiDetail;
+import apap.tugas.situ.rest.PegawaiDetailResponse;
 import apap.tugas.situ.rest.Setting;
+
+import org.json.JSONObject;
+import org.springframework.http.MediaType;
+import org.springframework.security.core.userdetails.UserDetails;
+
 import org.springframework.stereotype.Service;
+import org.springframework.util.LinkedMultiValueMap;
+import org.springframework.util.MultiValueMap;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
@@ -14,8 +28,8 @@ public class UserRestServiceImpl implements UserRestService {
 
     private final WebClient webClient;
 
-
-    private String generateKodeNIP(String tanggalLahir, String uuid) {
+    @Override
+    public String generateKodeNIP(String tanggalLahir, String uuid) {
         String[] date = tanggalLahir.split("-");
         return "P".concat(date[2]).concat(date[1]).concat(date[0])
                 .concat(String.valueOf(generateRandomChar()))
@@ -25,8 +39,34 @@ public class UserRestServiceImpl implements UserRestService {
                 .concat(String.valueOf(generateRandomNum()))
                 .concat(uuid);
     }
+    
+    /*
+    
+    @Override
+    public String generateKodeNIS(String tanggalLahir, String uuid) {
+        String[] date = tanggalLahir.split("-");
+        return "S".concat(date[2]).concat(date[1]).concat(date[0])
+                .concat(String.valueOf(generateRandomChar()))
+                .concat(String.valueOf(generateRandomChar()))
+                .concat(String.valueOf(generateRandomNum()))
+                .concat(String.valueOf(generateRandomNum()))
+                .concat(String.valueOf(generateRandomNum()))
+                .concat(uuid);
+    }
+    
+    @Override
+    public String generateKodeNIG(String tanggalLahir, String uuid) {
+        String[] date = tanggalLahir.split("-");
+        return "G".concat(date[2]).concat(date[1]).concat(date[0])
+                .concat(String.valueOf(generateRandomChar()))
+                .concat(String.valueOf(generateRandomChar()))
+                .concat(String.valueOf(generateRandomNum()))
+                .concat(String.valueOf(generateRandomNum()))
+                .concat(String.valueOf(generateRandomNum()))
+                .concat(uuid);
+    }
 
-
+*/
 
     private char generateRandomChar(){
         Random random = new Random();
@@ -63,4 +103,59 @@ public class UserRestServiceImpl implements UserRestService {
             return null;
         }
     }
+
+    
+    @Override
+    public Mono<PegawaiDetailResponse> addPegawai(UserModel user, PegawaiDetail pegawai) {
+    	 MultiValueMap<String, String> data = new LinkedMultiValueMap<>();
+    	 data.add("idUser", user.getId());
+    	 data.add("nama", pegawai.getNama());
+    	 data.add("tanggalLahir", pegawai.getTanggalLahir());
+    	 data.add("tempatLahir", pegawai.getTempatLahir());
+    	 data.add("alamat", pegawai.getAlamat());
+    	 data.add("telepon", pegawai.getTelepon());
+    	 data.add("nip", pegawai.getNip());
+    	 return this.webClient.post().uri("http://sivitas.herokuapp.com/api/employees")
+    			 .contentType(MediaType.APPLICATION_JSON)
+                 .syncBody(data.toString())
+                 .retrieve()
+                 .bodyToMono(PegawaiDetailResponse.class);
+    }
+    
+    /*
+    @Override
+    public Mono<SiswaDetailResponse> addSiswa(UserModel user, SiswaDetail siswa) {
+    	// MultiValueMap<String, String> data = new LinkedMultiValueMap<>();
+    	 JSONObject data = new JSONObject();
+    	 data.put("idUser", user.getId());
+    	 data.put("nama", siswa.getNama());
+    	 data.put("tanggalLahir", siswa.getTanggalLahir());
+    	 data.put("tempatLahir", siswa.getTempatLahir());
+    	 data.put("alamat", siswa.getAlamat());
+    	 data.put("telepon", siswa.getTelepon());
+    	 data.put("nip", siswa.getNis());
+    	 return this.webClient.post().uri("/students")
+    			 .contentType(MediaType.APPLICATION_JSON)
+                 .syncBody(data.toString())
+                 .retrieve()
+                 .bodyToMono(SiswaDetailResponse.class);
+    }
+    
+    public Mono<GuruDetailResponse> addGuru(UserModel user, GuruDetail guru) {
+	   	 MultiValueMap<String, String> data = new LinkedMultiValueMap<>();
+	   	 data.add("idUser", user.getId());
+	   	 data.add("nama", guru.getNama());
+	   	 data.add("tanggalLahir", guru.getTanggalLahir());
+	   	 data.add("tempatLahir", guru.getTempatLahir());
+	   	 data.add("alamat", guru.getAlamat());
+	   	 data.add("telepon", guru.getTelepon());
+	   	 data.add("nip", guru.getNig());
+	   	 return this.webClient.post().uri("/teachers")
+	   			 .contentType(MediaType.APPLICATION_JSON)
+	                .syncBody(data.toString())
+	                .retrieve()
+	                .bodyToMono(GuruDetailResponse.class);
+   }*/
+
+
 }

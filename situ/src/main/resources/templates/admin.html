@@ -17,7 +17,22 @@
 	            <div class="card">
 	                <div class="card-header">Yuk, Tambah User Baru!</div>
 	                <div class="card-body">
-	                    <form th:action="@{/user/addUser}" method="POST">
+	                    <form th:action="@{/api/addUser}" method="POST">
+	                        <label>Nama</label>
+	                        <input type="text" name="nama" class="form-control">
+	                        <br>
+	                        <label>Tempat Lahir</label>
+	                        <input type="text" name="tempatLahir" class="form-control">
+	                        <br>
+	                        <label>Tanggal Lahir</label>
+	                        <input type="text" name="tanggalLahir" class="form-control" placeholder="yyyy-mm-dd">
+	                        <br>
+	                        <label>Nomor Telepon</label>
+	                        <input type="text" name="telepon" class="form-control">
+	                        <br>
+	                        <label>Alamat</label>
+	                        <input type="text" name="alamat" class="form-control">
+	                        <br>
 	                        <label> User Name</label>
 	                        <input type="text" name="username" class="form-control">
 	                        <br>

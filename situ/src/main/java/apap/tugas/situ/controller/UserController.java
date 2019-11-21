@@ -51,7 +51,7 @@ public class UserController {
 //                return "error";
 //            }
 //    }
-
+    
     @RequestMapping(value = "/addUser", method = RequestMethod.POST)
     private String addUserSubmit(@ModelAttribute UserModel user, Model model) {
         userService.addUser(user);
