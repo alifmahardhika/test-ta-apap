@@ -17,6 +17,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.List;
@@ -63,7 +64,7 @@ public class UserRestController {
     		@RequestParam(required=false) String tempatLahir, 
     		@RequestParam(required=false) String tanggalLahir, 
     		@RequestParam(required=false) String alamat,
-    		@RequestParam(required=false) String telepon, Model model) throws ParseException {
+    		@RequestParam(required=false) String telepon, Model model) throws ParseException, java.text.ParseException {
     	
     	if (userService.getUser(user.getUsername()) != null) {
     		return "error";
@@ -104,21 +105,25 @@ public class UserRestController {
     				}
     			}
     			*/
-    			if (user.getRole().getNama().equals("Pegawai")) {
+    			
     			PegawaiDetail pegawai = new PegawaiDetail();
     				String nip = userRestService.generateKodeNIP(tanggalLahir, user.getId());
+    				DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+    				Date dateTanggal = dateFormat.parse(tanggalLahir);
     				pegawai.setNama(nama);
     				pegawai.setTempatLahir(tempatLahir);
     				//pegawai.setTanggalLahir(birthDate);
-    				pegawai.setTanggalLahir(tanggalLahir);
+    				pegawai.setTanggalLahir(dateTanggal);
     				pegawai.setAlamat(alamat);
     				pegawai.setTelepon(telepon);
     				pegawai.setNip(nip);
     				pegawai.setIdUser(Long.parseLong(user.getId()));
+    				System.out.println(pegawai.getIdUser() + "\n" + pegawai.getNip() + "\n" + pegawai.getNama() + "\n" +
+    				    	 pegawai.getTempatLahir() + "\n" + pegawai.getAlamat() + "\n" +pegawai.getTelepon());
     				if (userRestService.addPegawai(user, pegawai).block().getStatus()=="200") {
     					return "success";
     				}
-    			}
+    			
     		} 
     	}
         return "view-user-profile";

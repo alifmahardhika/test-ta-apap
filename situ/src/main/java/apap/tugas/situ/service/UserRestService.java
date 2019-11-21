@@ -17,7 +17,7 @@ import java.util.Map;
 
 public interface UserRestService {
 
-    public Mono<PegawaiDetail> getPegawai(String uuid);
+    
     public String generateKodeNIP(String tanggalLahir, String uuid); 
     public Mono<PegawaiDetailResponse> addPegawai(UserModel user, PegawaiDetail pegawai);
     /*public String generateKodeNIG(String tanggalLahir, String uuid); 
@@ -25,7 +25,7 @@ public interface UserRestService {
     public Mono<SiswaDetailResponse> addSiswa(UserModel user, SiswaDetail siswa);
     public Mono<GuruDetailResponse> addGuru(UserModel user, GuruDetail guru);*/
 
-//    public Mono<PegawaiDetail> getPegawai(String uuid);
-    public Map<String,String> getPegawai(String uuid);
+    public Map<String, String> getPegawai(String uuid);
+    
 
 }

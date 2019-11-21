@@ -92,7 +92,28 @@ public class UserRestServiceImpl implements UserRestService {
 //            return null;
 //        }
 //    }
-
+    
+    @Override
+    public Mono<PegawaiDetailResponse> addPegawai(UserModel user, PegawaiDetail pegawai) {
+    	 JSONObject data = new JSONObject();
+    	 data.put("idUser", user.getId());
+    	 data.put("nip", pegawai.getNip());
+    	 data.put("nama", pegawai.getNama());
+    	 data.put("tempatLahir", pegawai.getTempatLahir());
+    	 data.put("tanggalLahir", pegawai.getTanggalLahir());
+    	 data.put("alamat", pegawai.getAlamat());
+    	 data.put("telepon", pegawai.getTelepon());
+    	 
+    	 System.out.println(user.getId() + "\n" + pegawai.getNip() + "\n" + pegawai.getNama() + "\n" +
+    	 pegawai.getTempatLahir() + "\n" + pegawai.getAlamat() + "\n" +pegawai.getTelepon());
+    	 
+    	 return this.webClient.post().uri("/employees")
+    			 .contentType(MediaType.APPLICATION_JSON)
+                 .syncBody(data.toString())
+                 .retrieve()
+                 .bodyToMono(PegawaiDetailResponse.class);
+    }
+    
     @Override
     public Map<String, String> getPegawai(String uuid) {
         try {
@@ -102,24 +123,6 @@ public class UserRestServiceImpl implements UserRestService {
         catch (NullPointerException e){
             return null;
         }
-    }
-
-    
-    @Override
-    public Mono<PegawaiDetailResponse> addPegawai(UserModel user, PegawaiDetail pegawai) {
-    	 MultiValueMap<String, String> data = new LinkedMultiValueMap<>();
-    	 data.add("idUser", user.getId());
-    	 data.add("nama", pegawai.getNama());
-    	 data.add("tanggalLahir", pegawai.getTanggalLahir());
-    	 data.add("tempatLahir", pegawai.getTempatLahir());
-    	 data.add("alamat", pegawai.getAlamat());
-    	 data.add("telepon", pegawai.getTelepon());
-    	 data.add("nip", pegawai.getNip());
-    	 return this.webClient.post().uri("http://sivitas.herokuapp.com/api/employees")
-    			 .contentType(MediaType.APPLICATION_JSON)
-                 .syncBody(data.toString())
-                 .retrieve()
-                 .bodyToMono(PegawaiDetailResponse.class);
     }
     
     /*
