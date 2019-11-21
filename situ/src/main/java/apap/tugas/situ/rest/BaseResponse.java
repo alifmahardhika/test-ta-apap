@@ -24,6 +24,10 @@ public class BaseResponse<T> {
         return result;
     }
 
+    public void setResult(T result) {
+        this.result = result;
+    }
+
     /**
      * @param status the status to set
      */
@@ -35,11 +39,5 @@ public class BaseResponse<T> {
      */
     public void setMessage(String message) {
         this.message = message;
-    }
-    /**
-     * @param result the result to set
-     */
-    public void setResult(T result) {
-        this.result = result;
     }
 }

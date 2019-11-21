@@ -55,7 +55,7 @@ public class UserController {
     @RequestMapping(value = "/addUser", method = RequestMethod.POST)
     private String addUserSubmit(@ModelAttribute UserModel user, Model model) {
         userService.addUser(user);
-        model.addAttribute("pesan", "Berhasil menambahkan user!");
+        model.addAttribute("username", user.getUsername());
         return "add-user-success";
 
     }
