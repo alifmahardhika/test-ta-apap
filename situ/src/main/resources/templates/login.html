@@ -8,37 +8,31 @@
     <object th:include="fragments/fragment :: js" th:remove="tag"></object>
 </head>
 
-<body>
-<div class="container mt-5 center">
-    <h2>Selamat datang di Sistem Informasi Tata Usaha</h2>
-    <div class="row">
-        <div class="col-md-4">
-            <div class="card">
-                <div class="card-header">
-                    Log In
-                </div>
-                <div class="card-body">
+<body style="background: linear-gradient(to right top, #105dd4, #8371d8, #ba8bdd, #e1aae4, #ffcef0) no-repeat;
+background-size: 100% 100vh;">
+<div class="container d-flex flex-column align-items-center">
+    <h1 class="text-center font-weight-bolder m-4 text-white"
+    style="text-shadow: 2px 3px 0px #898999">SI Tata Usaha</h1>
+            <div class="card shadow-lg d-flex flex-column align-items-center p-lg-4"
+            style="width: 40%;">
+                <h3 class="font-weight-bolder mb-3">Log in</h3>
                     <div th:if="${param.error}">
                         <span style="color: red">Invalid username or password</span>
                     </div>
-                    <form th:action="@{/login}" method="POST">
-                        <div class="row form-group">
-                            <label class="col-sm-4">Username:</label>
-                            <input type="text" class="col-sm-8 form-control input-sm" name="username">
+                    <form th:action="@{/login}" method="POST" class="w-100">
+                        <div class="form-group mb-4">
+                            <label>Username</label>
+                            <input type="text" placeholder="Username" class="form-control input-sm" name="username">
                         </div>
-                        <div class="row form-group">
-                            <label class="col-sm-4">Password:</label>
-                            <input type="password" class="col-sm-8 form-control input-sm" name="password">
+                        <div class="form-group mb-4">
+                            <label>Password</label>
+                            <input type="password" placeholder="Password" class="form-control input-sm" name="password">
                         </div>
-                        <div class="row form-group">
-                            <button type="submit" class="btn btn-primary">Sign In</button>
+                        <div class="form-group">
+                            <button type="submit" class="btn btn-primary w-100">Sign In</button>
                         </div>
                     </form>
-                </div>
             </div>
-        </div>
     </div>
-</div>
 </body>
-
-</html>s
+</html>

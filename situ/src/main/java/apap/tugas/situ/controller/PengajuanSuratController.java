@@ -56,7 +56,6 @@ public class PengajuanSuratController {
 
         for (PengajuanSuratModel surat : pengajuanSurat){
             if(surat.getId().equals(idPengajuanSurat)){
-                System.out.println("masuk ke if oi");
                 pengajuanSuratService.deletePengajuanSurat(surat);
                 model.addAttribute("noSurat", surat.getId());
             }
@@ -68,4 +67,3 @@ public class PengajuanSuratController {
         return "pengajuan-surat/hapus-pengajuanSurat";
     }
 }
-
