@@ -45,6 +45,7 @@ public class LowonganRestController {
 
         jumlahPegawaiDetailResponse = lowonganRestService.getJumlahPegawaiDetail();
         int jumlah = lowonganRestService.getIntJumlah(jumlahPegawaiDetailResponse);
+        System.out.println("masuk controller bagian getjumlah");
         if (jumlah < 5){
             String closeDate = "";
             LocalDate dateNow = LocalDate.now();
@@ -63,9 +64,6 @@ public class LowonganRestController {
             LocalDate closingDate = LocalDate.parse(closeDate);
             Long idJenisPustakawan = jenisLowonganService.findIdByNama("Pustakawan");
             LowonganModel automatedCreation = new LowonganModel("Lowongan Pustakawan", dateNow, closingDate, "Dibutuhkan Pustakawan Cakap", 5-jumlah, idJenisPustakawan );
-
-            //            System.out.println("================================ni otomatis");
-//            System.out.println(automatedCreation.toString());
 
             if (lowonganService.foundSimilar(automatedCreation)){
                 System.out.println("=====================udah ada lowongan dengan jumlah dan judul dan jenis dan tanggal yg sama");

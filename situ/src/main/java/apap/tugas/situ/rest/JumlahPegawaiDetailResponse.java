@@ -3,16 +3,20 @@ package apap.tugas.situ.rest;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
+import java.util.List;
+
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class JumlahPegawaiDetailResponse {
     @JsonProperty("status")
     private String status;
 
-    @JsonProperty("messages")
-    private String messages;
+    @JsonProperty("message")
+    private String message;
 
     @JsonProperty("result")
-    private JumlahPegawaiDetail result;
+    private List<JumlahPegawaiResultDetail> result;
+
+//    private JumlahPegawaiDetail result;
 
     public String getStatus() {
         return status;
@@ -22,28 +26,45 @@ public class JumlahPegawaiDetailResponse {
         this.status = status;
     }
 
-    public String getMessages() {
-        return messages;
+    public String getMessage() {
+        return message;
     }
 
-    public void setMessages(String message) {
-        this.messages = message;
+    public void setMessage(String message) {
+        this.message = message;
     }
 
-    public JumlahPegawaiDetail getResult() {
+    public List<JumlahPegawaiResultDetail> getResult() {
         return result;
     }
 
-    public void setResult(JumlahPegawaiDetail result) {
-        this.result = result;
+    public void setResult(List<JumlahPegawaiResultDetail> results) {
+        this.result = results;
     }
 
     @Override
     public String toString() {
         return "JumlahPegawaiDetailResponse{" +
                 "status='" + status + '\'' +
-                ", message='" + messages + '\'' +
-                ", result=" + result +
+                ", messages='" + message + '\'' +
+                ", results=" + result.toString() +
                 '}';
     }
+
+    //    public JumlahPegawaiDetail getResult() {
+//        return result;
+//    }
+//
+//    public void setResult(JumlahPegawaiDetail result) {
+//        this.result = result;
+//    }
+
+//    @Override
+//    public String toString() {
+//        return "JumlahPegawaiDetailResponse{" +
+//                "status='" + status + '\'' +
+//                ", message='" + messages + '\'' +
+//                ", result=" + result +
+//                '}';
+//    }
 }

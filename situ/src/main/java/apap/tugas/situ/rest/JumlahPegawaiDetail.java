@@ -9,24 +9,14 @@ import java.util.List;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class JumlahPegawaiDetail {
 
-    private int jumlah;
-//    @JsonIgnoreProperties("idUser")
-//    private Long idUser;
+    private List<JumlahPegawaiResultDetail> results;
 
-
-    public int getJumlah() {
-        return jumlah;
+    public List<JumlahPegawaiResultDetail> getResults() {
+        return results;
     }
 
-    public void setJumlah(int jumlah) {
-        this.jumlah = jumlah;
-    }
-
-    @Override
-    public String toString() {
-        return "JumlahPegawaiDetail{" +
-                "jumlah=" + jumlah +
-                '}';
+    public void setResults(List<JumlahPegawaiResultDetail> results) {
+        this.results = results;
     }
 }
 
