@@ -2,6 +2,7 @@ package apap.tugas.situ.service;
 
 import apap.tugas.situ.rest.JumlahPegawaiDetail;
 import apap.tugas.situ.rest.JumlahPegawaiDetailResponse;
+import apap.tugas.situ.rest.JumlahPegawaiResultDetail;
 import apap.tugas.situ.rest.Setting;
 import com.google.gson.Gson;
 import com.google.gson.JsonObject;
@@ -10,12 +11,14 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
+import java.util.List;
+
 @Service
 public class LowonganRestServiceImpl implements LowonganRestService{
     private final WebClient webClient;
 
     public LowonganRestServiceImpl(WebClient.Builder webClientBuilder){
-        this.webClient = webClientBuilder.baseUrl(Setting.jumlahPegawaiUrl).build();
+        this.webClient = webClientBuilder.baseUrl(Setting.perpustakaanUrl).build();
     }
 
     @Override
@@ -28,32 +31,31 @@ public class LowonganRestServiceImpl implements LowonganRestService{
         JsonObject object = (JsonObject) parser.parse(jsonStr);
 
         JumlahPegawaiDetailResponse jumlahPegawaiDetailResponse = gson.fromJson(object, JumlahPegawaiDetailResponse.class);
-//        System.out.println("=====================bangsat");
-//        System.out.println(jumlahPegawaiDetail.getResult());
-//        System.out.println(jumlahPegawaiDetail.getMessages());
-//        System.out.println(jumlahPegawaiDetail.getStatus());
-//        System.out.println("======================object to string");
-//        System.out.println(jumlahPegawaiDetail.toString());
-//        System.out.println("================togetint");
+
+
         return jumlahPegawaiDetailResponse;
-//        return this.webClient.get().uri("/")
-//                .retrieve().bodyToMono(JumlahPegawaiDetail.class);
     }
 
     public String getJsonStringJumlahPegawaiDetail(){
-        String result1 = this.webClient.get().uri("/")
+        String result1 = this.webClient.get().uri("/api/user/list")
                 .retrieve().bodyToMono(String.class).block();
-//        System.out.println("dari json: " + result1);
+        System.out.println("dari json: " + result1);
         return result1;
     }
 //    public Boolean checkJumlahPustakawan(in)
 
     @Override
     public int getIntJumlah(JumlahPegawaiDetailResponse response){
-//        String[] listResponse
-//        System.out.println(response.getResult().toString());
-////        System.out.println();
-        return response.getResult().getJumlah();
+        List<JumlahPegawaiResultDetail> results = response.getResult();
+        int jumlah = 0;
+        for (JumlahPegawaiResultDetail target: results){
+            if (target.getRole().equalsIgnoreCase("Pustakawan")){
+                jumlah++;
+            }
+        }
+        System.out.println("=======================================jumlahnya brp yha");
+        System.out.println(jumlah);
+        return jumlah;
     }
 
 
