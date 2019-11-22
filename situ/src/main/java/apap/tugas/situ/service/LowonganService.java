@@ -9,4 +9,5 @@ public interface LowonganService {
     List<LowonganModel> findAllLowongan();
     LowonganModel findLowonganById(Long idLowongan);
     void changeJumlahLowongan (Long idLowongan, Integer jumlah);
+    boolean foundSimilar(LowonganModel lowonganModel);
 }

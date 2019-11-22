@@ -2,7 +2,17 @@ package apap.tugas.situ.service;
 
 
 import apap.tugas.situ.model.UserModel;
-import apap.tugas.situ.rest.*;
+
+import apap.tugas.situ.rest.GuruDetail;
+import apap.tugas.situ.rest.GuruDetailResponse;
+
+import apap.tugas.situ.rest.BaseResponse;
+
+import apap.tugas.situ.rest.PegawaiDetail;
+import apap.tugas.situ.rest.PegawaiDetailResponse;
+import apap.tugas.situ.rest.Setting;
+import apap.tugas.situ.rest.SiswaDetail;
+import apap.tugas.situ.rest.SiswaDetailResponse;
 
 import org.json.JSONObject;
 import org.springframework.http.MediaType;
@@ -14,6 +24,9 @@ import org.springframework.util.MultiValueMap;
 import org.springframework.web.reactive.function.client.WebClient;
 import reactor.core.publisher.Mono;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
 @Service
@@ -34,7 +47,6 @@ public class UserRestServiceImpl implements UserRestService {
     }
     
 
-    
     @Override
     public String generateKodeNIS(String tanggalLahir, String uuid) {
         String[] date = tanggalLahir.split("-");
@@ -76,21 +88,21 @@ public class UserRestServiceImpl implements UserRestService {
     
     @Override
     public Mono<PegawaiDetailResponse> addPegawai(UserModel user, PegawaiDetail pegawai) {
-    	 JSONObject data = new JSONObject();
+    	 DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+    	 String strDate = dateFormat.format(pegawai.getTanggalLahir());
+    	 Map<String, String> data = new HashMap<>();
     	 data.put("idUser", user.getId());
     	 data.put("nip", pegawai.getNip());
     	 data.put("nama", pegawai.getNama());
     	 data.put("tempatLahir", pegawai.getTempatLahir());
-    	 data.put("tanggalLahir", pegawai.getTanggalLahir());
+    	 data.put("tanggalLahir", strDate);
     	 data.put("alamat", pegawai.getAlamat());
     	 data.put("telepon", pegawai.getTelepon());
     	 
-    	 System.out.println(user.getId() + "\n" + pegawai.getNip() + "\n" + pegawai.getNama() + "\n" +
-    	 pegawai.getTempatLahir() + "\n" + pegawai.getAlamat() + "\n" +pegawai.getTelepon());
-    	 
+    	
     	 return this.webClient.post().uri("/employees")
     			 .contentType(MediaType.APPLICATION_JSON)
-                 .syncBody(data.toString())
+                 .syncBody(data)
                  .retrieve()
                  .bodyToMono(PegawaiDetailResponse.class);
     }
@@ -105,6 +117,7 @@ public class UserRestServiceImpl implements UserRestService {
             return null;
         }
     }
+
 
     @Override
     public Map<String, String> getUser(String uuid, String roles) {
@@ -121,37 +134,47 @@ public class UserRestServiceImpl implements UserRestService {
 
     @Override
     public Mono<SiswaDetailResponse> addSiswa(UserModel user, SiswaDetail siswa) {
-    	// MultiValueMap<String, String> data = new LinkedMultiValueMap<>();
-    	 JSONObject data = new JSONObject();
+    	 DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+    	 String strDate = dateFormat.format(siswa.getTanggalLahir());
+    	 Map<String, String> data = new HashMap<>();
     	 data.put("idUser", user.getId());
+    	 data.put("nis", siswa.getNis());
     	 data.put("nama", siswa.getNama());
-    	 data.put("tanggalLahir", siswa.getTanggalLahir());
     	 data.put("tempatLahir", siswa.getTempatLahir());
+    	 data.put("tanggalLahir", strDate);
     	 data.put("alamat", siswa.getAlamat());
     	 data.put("telepon", siswa.getTelepon());
-    	 data.put("nip", siswa.getNis());
+    	 
+    	
     	 return this.webClient.post().uri("/students")
     			 .contentType(MediaType.APPLICATION_JSON)
-                 .syncBody(data.toString())
+                 .syncBody(data)
                  .retrieve()
                  .bodyToMono(SiswaDetailResponse.class);
     }
 
+    
+    @Override
     public Mono<GuruDetailResponse> addGuru(UserModel user, GuruDetail guru) {
-	   	 MultiValueMap<String, String> data = new LinkedMultiValueMap<>();
-	   	 data.add("idUser", user.getId());
-	   	 data.add("nama", guru.getNama());
-	   	 data.add("tanggalLahir", guru.getTanggalLahir());
-	   	 data.add("tempatLahir", guru.getTempatLahir());
-	   	 data.add("alamat", guru.getAlamat());
-	   	 data.add("telepon", guru.getTelepon());
-	   	 data.add("nip", guru.getNig());
-	   	 return this.webClient.post().uri("/teachers")
-	   			 .contentType(MediaType.APPLICATION_JSON)
-	                .syncBody(data.toString())
-	                .retrieve()
-	                .bodyToMono(GuruDetailResponse.class);
-   }
+    	 DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+    	 String strDate = dateFormat.format(guru.getTanggalLahir());
+    	 Map<String, String> data = new HashMap<>();
+    	 data.put("idUser", user.getId());
+    	 data.put("nig", guru.getNig());
+    	 data.put("nama", guru.getNama());
+    	 data.put("tempatLahir", guru.getTempatLahir());
+    	 data.put("tanggalLahir", strDate);
+    	 data.put("alamat", guru.getAlamat());
+    	 data.put("telepon", guru.getTelepon());
+    	 
+    	
+    	 return this.webClient.post().uri("/teachers")
+    			 .contentType(MediaType.APPLICATION_JSON)
+                 .syncBody(data)
+                 .retrieve()
+                 .bodyToMono(GuruDetailResponse.class);
+    }
+
 
 
 }

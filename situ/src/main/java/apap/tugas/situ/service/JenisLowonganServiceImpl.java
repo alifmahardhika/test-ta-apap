@@ -62,6 +62,17 @@ public class JenisLowonganServiceImpl implements JenisLowonganService{
         }
         return true;
     }
+
+    @Override
+    public long findIdByNama(String nama){
+        List<JenisLowonganModel> listJenis = jenisLowonganDb.findAll();
+        for (JenisLowonganModel jenis: listJenis){
+            if (jenis.getNama().equalsIgnoreCase(nama)){
+                return jenis.getIdJenis();
+            }
+        }
+        return 0;
+    }
 }
 
 

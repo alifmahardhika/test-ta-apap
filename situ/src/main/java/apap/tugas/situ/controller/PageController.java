@@ -1,6 +1,7 @@
 package apap.tugas.situ.controller;
 
 
+import apap.tugas.situ.model.Pinjaman;
 import apap.tugas.situ.model.RoleModel;
 import apap.tugas.situ.model.UserModel;
 import apap.tugas.situ.service.RoleService;
@@ -50,7 +51,13 @@ public class PageController {
 //        }
 
         return "admin";
+    }
 
+    @RequestMapping(value = "/request-pinjaman-form", method = RequestMethod.GET)
+    public String requestPinjamanForm(Model model) {
+        Pinjaman pinjaman = new Pinjaman();
+        model.addAttribute("pinjaman", pinjaman);
+        return "webservice/request-pinjaman-form";
     }
 
 

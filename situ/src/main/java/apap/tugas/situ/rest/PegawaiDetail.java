@@ -14,7 +14,7 @@ public class PegawaiDetail {
     @Id
     @NotNull
     @Size(max=32, min=32)
-    private Long idUser;
+    private String idUser;
 
     @NotNull
     @Size(max=200)
@@ -57,11 +57,11 @@ public class PegawaiDetail {
         this.nama = nama;
     }
 
-    public Long getIdUser() {
+    public String getIdUser() {
         return idUser;
     }
 
-    public void setIdUser(Long idUser) {
+    public void setIdUser(String idUser) {
         this.idUser = idUser;
     }
 
