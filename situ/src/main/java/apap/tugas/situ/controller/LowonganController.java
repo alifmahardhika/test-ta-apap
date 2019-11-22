@@ -2,7 +2,9 @@ package apap.tugas.situ.controller;
 
 import apap.tugas.situ.model.JenisLowonganModel;
 import apap.tugas.situ.model.LowonganModel;
+import apap.tugas.situ.rest.JumlahPegawaiDetailResponse;
 import apap.tugas.situ.service.JenisLowonganService;
+import apap.tugas.situ.service.LowonganRestService;
 import apap.tugas.situ.service.LowonganService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
@@ -17,6 +19,10 @@ public class LowonganController {
     @Qualifier("lowonganServiceImpl")
     @Autowired
     LowonganService lowonganService;
+
+    @Autowired
+    private LowonganRestService lowonganRestService;
+
 
     @Autowired
     JenisLowonganService jenisLowonganService;
@@ -65,6 +71,15 @@ public class LowonganController {
         List<LowonganModel> allLowongan = lowonganService.findAllLowongan();
         model.addAttribute("listLowongan", allLowongan);
         return "lowongan/viewAll-lowongan";
+    }
+
+    @RequestMapping(value = "api/lowongan/sinkronisasi", method = RequestMethod.GET)
+    public String sinkronisasi(Model model) {
+        JumlahPegawaiDetailResponse jumlahPegawaiDetailResponse;
+        jumlahPegawaiDetailResponse = lowonganRestService.getJumlahPegawaiDetail();
+        int jumlah = lowonganRestService.getIntJumlah(jumlahPegawaiDetailResponse);
+        model.addAttribute("jumlah", jumlah);
+        return "lowongan/sinkronisasi";
     }
 
 }

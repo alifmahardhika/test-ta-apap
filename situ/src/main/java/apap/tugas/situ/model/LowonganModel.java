@@ -119,4 +119,29 @@ public class LowonganModel implements Serializable {
 //    public void setUuidUser(String uuidUser) {
 //        this.uuidUser = uuidUser;
 //    }
+
+
+    @Override
+    public String toString() {
+        return "LowonganModel{" +
+                "judul='" + judul + '\'' +
+                ", tanggalDibuka=" + tanggalDibuka +
+                ", tanggalDitutup=" + tanggalDitutup +
+                ", keterangan='" + keterangan + '\'' +
+                ", jumlah=" + jumlah +
+                ", idJenis=" + idJenis +
+                '}';
+    }
+
+    public LowonganModel(@NotNull @Size(max = 200) String judul, @NotNull LocalDate tanggalDibuka, @NotNull LocalDate tanggalDitutup, @NotNull @Size(max = 200) String keterangan, @NotNull Integer jumlah, @NotNull Long idJenis) {
+        this.judul = judul;
+        this.tanggalDibuka = tanggalDibuka;
+        this.tanggalDitutup = tanggalDitutup;
+        this.keterangan = keterangan;
+        this.jumlah = jumlah;
+        this.idJenis = idJenis;
+    }
+
+    public LowonganModel() {
+    }
 }
