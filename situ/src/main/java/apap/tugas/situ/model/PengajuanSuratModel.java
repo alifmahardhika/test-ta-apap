@@ -1,5 +1,6 @@
 package apap.tugas.situ.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import org.hibernate.annotations.OnDelete;
 import org.hibernate.annotations.OnDeleteAction;
 
@@ -21,10 +22,12 @@ public class PengajuanSuratModel implements Serializable {
     @Column(name = "nomorSurat", nullable = false)
     private String nomorSurat;
 
+    @JsonIgnore
     @NotNull
     @Column(name = "tanggalPengajuan", nullable = false)
     private LocalDate tanggalPengajuan;
 
+    @JsonIgnore
     @Column(name = "tanggalDisetujui")
     private LocalDate tanggalDisetujui;
 
@@ -33,6 +36,7 @@ public class PengajuanSuratModel implements Serializable {
     @Column(name = "keterangan", nullable = false)
     private String keterangan;
 
+    @JsonIgnore
     @NotNull
     @Column(name = "status", nullable = false)
     private Integer status;
@@ -41,6 +45,11 @@ public class PengajuanSuratModel implements Serializable {
     @JoinColumn(name = "idJenisSurat", referencedColumnName = "idJenisSurat", nullable = false)
     @OnDelete(action = OnDeleteAction.CASCADE)
     private JenisSuratModel jenisSurat;
+
+    @ManyToOne(cascade = CascadeType.PERSIST, fetch = FetchType.EAGER, optional = false)
+    @JoinColumn(name = "uuidUser", referencedColumnName = "id", nullable = false)
+    @OnDelete(action = OnDeleteAction.CASCADE)
+    private UserModel user;
 
     public Long getId() {
         return id;
@@ -96,5 +105,13 @@ public class PengajuanSuratModel implements Serializable {
 
     public void setStatus(Integer status) {
         this.status = status;
+    }
+
+    public UserModel getUser() {
+        return user;
+    }
+
+    public void setUser(UserModel user) {
+        this.user = user;
     }
 }

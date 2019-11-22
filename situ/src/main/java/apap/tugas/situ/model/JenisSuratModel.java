@@ -29,6 +29,17 @@ public class JenisSuratModel implements Serializable {
 		return idJenisSurat;
 	}
 
+//	@OneToMany(mappedBy = "id_jenis_surat", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+//	private List <PengajuanSuratModel> listPengajuanSurat;
+//
+//	public List<PengajuanSuratModel> getListPengajuanSurat() {
+//		return listPengajuanSurat;
+//	}
+//
+//	public void setListPengajuanSurat(List<PengajuanSuratModel> listPengajuanSurat) {
+//		this.listPengajuanSurat = listPengajuanSurat;
+//	}
+
 	public void setIdJenisSurat(Long idJenisSurat) {
 		this.idJenisSurat = idJenisSurat;
 	}
@@ -49,9 +60,6 @@ public class JenisSuratModel implements Serializable {
 		this.keterangan = keterangan;
 	}
 
-	/*@OneToMany(mappedBy = "jenis_surat", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-	private List <PengajuanSuratModel> listPengajuanSurat;*/
-	
 	
 	
 }

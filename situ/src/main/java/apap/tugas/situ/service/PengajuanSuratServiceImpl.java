@@ -1,6 +1,7 @@
 package apap.tugas.situ.service;
 
 import apap.tugas.situ.model.PengajuanSuratModel;
+import apap.tugas.situ.model.UserModel;
 import apap.tugas.situ.repository.PengajuanSuratDb;
 import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -32,5 +33,10 @@ public class PengajuanSuratServiceImpl implements PengajuanSuratService {
     @Override
     public void deletePengajuanSurat(PengajuanSuratModel pengajuanSuratModel) {
         psdb.delete(pengajuanSuratModel);
+    }
+
+    @Override
+    public List<PengajuanSuratModel> getPengajuanSuratListByUser(UserModel user) {
+        return psdb.findAllByUser(user);
     }
 }
