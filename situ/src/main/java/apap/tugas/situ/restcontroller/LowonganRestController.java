@@ -4,10 +4,7 @@ import apap.tugas.situ.model.LowonganModel;
 import apap.tugas.situ.model.UserModel;
 import apap.tugas.situ.rest.JumlahPegawaiDetail;
 import apap.tugas.situ.rest.JumlahPegawaiDetailResponse;
-import apap.tugas.situ.service.JenisLowonganService;
-import apap.tugas.situ.service.LowonganRestService;
-import apap.tugas.situ.service.RoleService;
-import apap.tugas.situ.service.UserService;
+import apap.tugas.situ.service.*;
 import org.apache.tomcat.jni.Local;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -29,6 +26,9 @@ public class LowonganRestController {
 
     @Autowired
     private JenisLowonganService jenisLowonganService;
+
+    @Autowired
+    private LowonganService lowonganService;
 
     @Autowired
     RoleService roleService;
@@ -53,7 +53,7 @@ public class LowonganRestController {
                 //cek bulan trus bikin close date
                 if (Integer.parseInt(dateStr[1]) < 12){
 
-                    int monthPlusOne = Integer.parseInt(dateStr[1] +1);
+                    int monthPlusOne = Integer.parseInt(dateStr[1]) + 1;
                     dateStr[1] = "" + monthPlusOne;
                     closeDate = "" + dateStr[0] + "-" +dateStr[1] + "-" + dateStr[2];
                 }
@@ -65,11 +65,13 @@ public class LowonganRestController {
                 LowonganModel automatedCreation = new LowonganModel("Lowongan Pustakawan", dateNow, closingDate, "Dibutuhkan Pustakawan Cakap", 5-jumlah, idJenisPustakawan );
                 System.out.println("================================ni otomatis");
                 System.out.println(automatedCreation.toString());
+                lowonganService.addLowongan(automatedCreation);
             }
             model.addAttribute("jumlah", jumlahPegawaiDetailResponse);
         }
-        System.out.println("=============================== lebih dari 5" );
-
+        else {
+            System.out.println("=============================== lebih dari 5" );
+        }
 
         model.addAttribute("user", user);
         return "";
