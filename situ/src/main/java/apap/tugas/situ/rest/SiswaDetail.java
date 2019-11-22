@@ -1,52 +1,31 @@
 package apap.tugas.situ.rest;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import org.springframework.format.annotation.DateTimeFormat;
-
-import javax.persistence.Id;
-import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
-import java.util.Date;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class PegawaiDetail {
+public class SiswaDetail {
 
-    @Id
-    @NotNull
-    @Size(max=32, min=32)
+    @JsonIgnoreProperties("idUser")
     private Long idUser;
 
-    @NotNull
-    @Size(max=200)
-    private String nip;
+    private String nis;
 
-    @NotNull
-    @Size(max=200)
     private String nama;
 
-    @NotNull
-    @Size(max=200)
     private String tempatLahir;
 
-    @NotNull
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    private Date tanggalLahir;
+    private String tanggalLahir;
 
-    @NotNull
-    @Size(max=200)
     private String alamat;
 
-    @NotNull
-    @Size(max=200)
     private String telepon;
 
-
-    public String getNip() {
-        return nip;
+    public String getNis() {
+        return nis;
     }
 
-    public void setNip(String nip) {
-        this.nip = nip;
+    public void setNis(String nis) {
+        this.nis = nis;
     }
 
     public String getNama() {
@@ -73,11 +52,11 @@ public class PegawaiDetail {
         this.tempatLahir = tempatLahir;
     }
 
-    public Date getTanggalLahir() {
+    public String getTanggalLahir() {
         return tanggalLahir;
     }
 
-    public void setTanggalLahir(Date tanggalLahir) {
+    public void setTanggalLahir(String tanggalLahir) {
         this.tanggalLahir = tanggalLahir;
     }
 
