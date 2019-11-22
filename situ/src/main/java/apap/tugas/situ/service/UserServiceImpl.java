@@ -19,7 +19,6 @@ public class UserServiceImpl implements UserService {
     public UserModel addUser(UserModel user){
         String pass = encrypt(user.getPassword());
         user.setPassword(pass);
-        System.out.println("di user service impl yang adduser masuk");
         return userDb.save(user);
     }
 

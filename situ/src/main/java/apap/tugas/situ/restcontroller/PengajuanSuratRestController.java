@@ -1,6 +1,7 @@
 package apap.tugas.situ.restcontroller;
 
 import apap.tugas.situ.model.PengajuanSuratModel;
+import apap.tugas.situ.rest.BaseResponse;
 import apap.tugas.situ.service.JenisSuratRestService;
 import apap.tugas.situ.service.PengajuanSuratRestService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,7 @@ import org.springframework.web.server.ResponseStatusException;
 
 import javax.validation.Valid;
 import java.time.LocalDate;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 
@@ -24,12 +26,20 @@ public class PengajuanSuratRestController {
     private JenisSuratRestService jsrService;
 
     @GetMapping("/pengajuan-surat/{nomorSurat}")
-    private List<PengajuanSuratModel> retrievePengajuanSurat(@PathVariable("nomorSurat") String nomorSurat) {
-        try {
-            return psrService.getPengajuanSuratbyNomorSurat(nomorSurat);
-        } catch (NoSuchElementException e) {
+    private BaseResponse<List<PengajuanSuratModel>> retrievePengajuanSurat(@PathVariable("nomorSurat") String nomorSurat) {
+        BaseResponse<List<PengajuanSuratModel>> response = new BaseResponse<>();
+        List<PengajuanSuratModel> data = psrService.getPengajuanSuratbyNomorSurat(nomorSurat);
+
+        try{
+            response.setStatus(200);
+            response.setMessage("success");
+            response.setResult(data);
+
+            return response;
+        }
+        catch (NoSuchElementException e){
             throw new ResponseStatusException(
-                    HttpStatus.NOT_FOUND, "ID Restoran " + nomorSurat + " Not Found"
+                    HttpStatus.NOT_FOUND, "Surat dengan nomor surat "+ nomorSurat + " tidak ditemukan"
             );
         }
     }

@@ -52,41 +52,87 @@
                     <!--</tbody>-->
                 <!--</table>-->
 
-                <table class="table" th:if="${sisivitas != null}">
+                <!--<table class="table" th:if="${sisivitas != null}">-->
+                    <!--<tr>-->
+                        <!--<td>Nama:</td>-->
+                        <!--<td th:text="${pegawai.get('result').get('nama')}"></td>-->
+                    <!--</tr>-->
+                    <!--<tr>-->
+                        <!--<td>NIP:</td>-->
+                        <!--<td th:text="${pegawai.get('result').get('nip')}"></td>-->
+                    <!--</tr>-->
+                    <!--<tr>-->
+                        <!--<td>Tempat Lahir:</td>-->
+                        <!--<td th:text="${pegawai.get('result').get('tempatLahir')}"></td>-->
+                    <!--</tr>-->
+                    <!--<tr>-->
+                        <!--<td>Tanggal Lahir:</td>-->
+                        <!--<td th:text="${pegawai.get('result').get('tanggalLahir')}"></td>-->
+                    <!--</tr>-->
+                    <!--<tr>-->
+                        <!--<td>Alamat:</td>-->
+                        <!--<td th:text="${pegawai.get('result').get('alamat')}"></td>-->
+                    <!--</tr>-->
+                    <!--<tr>-->
+                        <!--<td>Telepon:</td>-->
+                        <!--<td th:text="${pegawai.get('result').get('telepon')}"></td>-->
+                    <!--</tr>-->
+                <!--</table>-->
+                <!--<table class="table" th:unless="${sisivitas != null}">-->
+                    <!--<tr>-->
+                        <!--<td>Nama:</td>-->
+                        <!--<td th:text="${pegawai.nama}"></td>-->
+                    <!--</tr>-->
+                    <!--<tr>-->
+                        <!--<td>Role:</td>-->
+                        <!--<td th:text="${pegawai.role}"></td>-->
+                    <!--</tr>-->
+                <!--</table>-->
+
+                <table class="table">
                     <tr>
-                        <td>Nama:</td>
-                        <td th:text="${pegawai.get('result').get('nama')}"></td>
+                        <td>Username</td>
+                        <td th:text="${user.username}"></td>
                     </tr>
                     <tr>
-                        <td>NIP:</td>
-                        <td th:text="${pegawai.get('result').get('nip')}"></td>
+                        <td>Role</td>
+                        <td th:text="${user.role.nama}"></td>
                     </tr>
-                    <tr>
-                        <td>Tempat Lahir:</td>
-                        <td th:text="${pegawai.get('result').get('tempatLahir')}"></td>
-                    </tr>
-                    <tr>
-                        <td>Tanggal Lahir:</td>
-                        <td th:text="${pegawai.get('result').get('tanggalLahir')}"></td>
-                    </tr>
-                    <tr>
-                        <td>Alamat:</td>
-                        <td th:text="${pegawai.get('result').get('alamat')}"></td>
-                    </tr>
-                    <tr>
-                        <td>Telepon:</td>
-                        <td th:text="${pegawai.get('result').get('telepon')}"></td>
-                    </tr>
-                </table>
-                <table class="table" th:unless="${sisivitas != null}">
-                    <tr>
-                        <td>Nama:</td>
-                        <td th:text="${pegawai.nama}"></td>
-                    </tr>
-                    <tr>
-                        <td>Role:</td>
-                        <td th:text="${pegawai.role}"></td>
-                    </tr>
+                    <div th:if="${profil != null}">
+                        <tr>
+                            <td>Nama</td>
+                            <td th:text="${profil.get('result').get('nama')}"></td>
+                        </tr>
+                        <tr>
+                            <td>
+                                <div th:if = "${role == 'teachers'}"> <p th:text="NIG"></p></div>
+                                <div th:if = "${role == 'employees'}"><p th:text="NIP"></p></div>
+                                <div th:IF = "${role == 'students'}"><p th:text="NIS"></p></div>
+
+                            </td>
+                            <td>
+                                <div th:if = "${role == 'teachers'}"> <p th:text="${profil.get('result').get('nig')}"></p></div>
+                                <div th:if = "${role == 'employees'}"><p th:text="${profil.get('result').get('nip')}"></p></div>
+                                <div th:if = "${role == 'students'}"><p th:text="${profil.get('result').get('nis')}"></p></div>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>Tempat Lahir</td>
+                            <td th:text="${profil.get('result').get('tempatLahir')}"></td>
+                        </tr>
+                        <tr>
+                            <td>Tanggal Lahir</td>
+                            <td th:text="${profil.get('result').get('tanggalLahir')}"></td>
+                        </tr>
+                        <tr>
+                            <td>Alamat</td>
+                            <td th:text="${profil.get('result').get('alamat')}"></td>
+                        </tr>
+                        <tr>
+                            <td>Telepon</td>
+                            <td th:text="${profil.get('result').get('telepon')}"></td>
+                        </tr>
+                    </div>
                 </table>
             </div>
         </div>

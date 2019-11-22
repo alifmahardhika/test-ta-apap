@@ -17,6 +17,8 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 
+import java.util.ArrayList;
+import java.util.LinkedHashMap;
 import java.util.List;
 import java.util.Map;
 
@@ -53,11 +55,19 @@ public class UserController {
 //    }
     
     @RequestMapping(value = "/addUser", method = RequestMethod.POST)
-    private String addUserSubmit(@ModelAttribute UserModel user, Model model) {
-        userService.addUser(user);
-        model.addAttribute("username", user.getUsername());
-        return "add-user-success";
+    private String addUserSubmit(@ModelAttribute UserModel user, Authentication authentication, Model model) {
+        if (userService.getUser(user.getUsername()) == null ) {
+            userService.addUser(user);
+            model.addAttribute("username", user.getUsername());
+            return "add-user-success";
+        }
 
+        List<RoleModel> listRole = roleService.findAll();
+        UserModel userLogged = userService.getUser(authentication.getName());
+        model.addAttribute("listRole", listRole);
+        model.addAttribute("user", userLogged);
+        model.addAttribute("errormsg", "Username tidak valid");
+        return "admin";
     }
 
 //    @RequestMapping(value = "/addUser", method = RequestMethod.POST)
@@ -141,18 +151,38 @@ public class UserController {
         List<RoleModel> listRole = roleService.findAll();
         UserModel user = userService.getUser(SecurityContextHolder.getContext().getAuthentication().getName());
         String userId = user.getId();
-        Map<String, String> pegawai = userRestService.getPegawai(userId);
+        Map<String, String> profil = null;
+        String role = "";
 
-        if(pegawai != null){
-            model.addAttribute("pegawai", pegawai);
-            model.addAttribute("sisivitas", "Ada");
-            System.out.println("masuk kok ke if dalem");
-        } else {
-            model.addAttribute("pegawai", user);
+        if(user.getRole().getId().equals(2L)){
+            role = "employees";
+
+        } else if (user.getRole().getId().equals(3L)){
+            role = "teachers";
+
+        } else if (user.getRole().getId().equals(4L)){
+            role = "students";
         }
 
+        Map<String, Object> allProfile = userRestService.getAllUsers(role);
+        ArrayList listUser = (ArrayList) allProfile.get("result");
+        ArrayList<String> listUuid = new ArrayList<String>();
+        for (int i = 0; i <listUser.size(); i++ ){
+            LinkedHashMap<String, Object> ab = (LinkedHashMap<String, Object>) listUser.get(i);
+            listUuid.add((String)ab.get("idUser"));
+        }
+        if(listUuid.contains(userId)){
+            profil = userRestService.getUser(userId, role);
+            model.addAttribute("sisivitas", "Ada");
+            System.out.println(listUuid);
+            System.out.println(profil);
+        }else {
+            profil = null;
+        }
+
+        model.addAttribute("profil", profil);
         model.addAttribute("user", user);
-        System.out.println("masuk kok ke controller profil");
+        model.addAttribute("role", role);
         return "view-user-profile";
     }
 

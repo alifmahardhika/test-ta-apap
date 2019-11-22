@@ -3,11 +3,12 @@ package apap.tugas.situ.service;
 
 import apap.tugas.situ.model.UserModel;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface UserService {
-
     UserModel addUser(UserModel user);
+
     public String encrypt(String password);
 
     UserModel getUser(String username);

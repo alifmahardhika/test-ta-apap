@@ -9,6 +9,7 @@ import javax.persistence.*;
 import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Size;
 import java.io.Serializable;
+import java.util.List;
 
 @Entity
 @Table(name = "user")
@@ -18,11 +19,13 @@ public class UserModel implements Serializable {
     @GenericGenerator(name = "system-uuid", strategy = "uuid")
     private String id;
 
+    @JsonIgnore
     @NotNull
     @Size(max = 50)
     @Column(name = "username", nullable = false, unique = true)
     private String username;
 
+    @JsonIgnore
     @NotNull
     @Lob
     @Column(name = "password", nullable = false)
@@ -33,6 +36,10 @@ public class UserModel implements Serializable {
     @OnDelete(action = OnDeleteAction.CASCADE)
     @JsonIgnore
     private RoleModel role;
+
+    @JsonIgnore
+    @OneToMany(mappedBy = "user", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    private List<PengajuanSuratModel> listPengajuanSurat;
 
     public String getId() {
         return id;
@@ -64,5 +71,13 @@ public class UserModel implements Serializable {
 
     public void setRole(RoleModel role) {
         this.role = role;
+    }
+
+    public List<PengajuanSuratModel> getListPengajuanSurat() {
+        return listPengajuanSurat;
+    }
+
+    public void setListPengajuanSurat(List<PengajuanSuratModel> listPengajuanSurat) {
+        this.listPengajuanSurat = listPengajuanSurat;
     }
 }

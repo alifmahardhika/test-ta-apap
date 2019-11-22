@@ -43,7 +43,6 @@ public class PageController {
     private String halamanAdmin(Authentication authentication, Model model){
         List<RoleModel> listRole = roleService.findAll();
         UserModel user = userService.getUser(authentication.getName());
-        System.out.println("masuk method hala");
         model.addAttribute("listRole", listRole);
         model.addAttribute("user", user);
 //        if(user.getRole().getRole() != null){
