@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeLeaf.org">
+<head>
+    <title> Gagal Menambahkan Lowongan </title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="container mt-5">
+    <p th:text="' Lowongan dengan judul &quot' + ${judulLowongan} + '&quot dan jumlah lowongan yang sama telah dibuat sebelumnya.'"></p>
+    <br/>
+    <p th:text="'Sesuaikan spesifikasi lowongan, atau hapus lowongan sebelumnya terlebih dahulu untuk membuat lowongan &quot' + ${judulLowongan} + '&quot '"></p>
+
+</div>
+</body>
+<footer th:replace="fragments/fragment :: footer"></footer>
+</html>
