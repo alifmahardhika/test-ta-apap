@@ -40,7 +40,7 @@
 <!--</div>-->
 <!--</nav>-->
 
-<nav th:fragment="navbar" class="navbar navbar-expand-lg navbar-light bg-light primary-color">
+<nav th:fragment="navbar" class="navbar fixed-top navbar-expand-lg navbar-light bg-light primary-color">
 
     <!-- Navbar brand -->
     <a class="navbar-brand font-weight-bold" th:href="@{/}" th:text="SITU"></a>
@@ -55,7 +55,7 @@
     <!-- Collapsible content -->
     <div class="collapse navbar-collapse" id="basicExampleNav">
         <!-- Links -->
-        <ul class="navbar-nav mr-auto">
+        <ul class="navbar-nav w-100">
             <li class="nav-item active">
                 <a class="nav-link" th:href="@{/}">Beranda
                     <span class="sr-only">(current)</span>
@@ -99,17 +99,20 @@
                 </div>
             </li>
 
-            <li class="nav-item dropdown pull-right">
+
+            <li class="nav-item dropdown ml-auto">
                 <a class="nav-link dropdown-toggle" id="navbarDropdownMenuLink" data-toggle="dropdown"
                    aria-haspopup="true" aria-expanded="false" th:text=" 'Hello ' + ${#httpServletRequest.remoteUser} + ' !'">Profil</a>
-                <div class="dropdown-menu dropdown-primary" aria-labelledby="navbarDropdownMenuLink">
-                    <a class="nav-link" th:href="@{/admin}">Halaman Admin</a>
-                    <a class="nav-item nav-link active" th:href="@{/user/update-password/{username} (username=${#httpServletRequest.remoteUser})}"> Update Password <span class="sr-only"></span> </a>
-                    <a class="nav-link" th:href="@{/user/profil}">Halaman Profil</a>
-                    <a class="nav-item nav-link active" th:href="@{/logout}">Logout</a>
+                <div class="dropdown-menu dropdown-menu-right" aria-labelledby="navbarDropdownMenuLink">
+                    <a class="dropdown-item" th:href="@{/admin}">Halaman Admin</a>
+                    <a class="dropdown-item" th:href="@{/user/update-password/{username} (username=${#httpServletRequest.remoteUser})}"> Update Password <span class="sr-only"></span> </a>
+                    <a class="dropdown-item" th:href="@{/user/profil}">Halaman Profil</a>
+                    <a class="dropdown-item" th:href="@{/logout}">Logout</a>
 
                 </div>
             </li>
+
+
 
 
             <!--<div class="navbar-nav pull-right">-->

@@ -53,8 +53,6 @@ public class LowonganRestServiceImpl implements LowonganRestService{
                 jumlah++;
             }
         }
-        System.out.println("=======================================jumlahnya brp yha");
-        System.out.println(jumlah);
         return jumlah;
     }
 
