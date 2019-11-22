@@ -40,7 +40,7 @@ public class LowonganRestController {
     @RequestMapping(value = "/jumlah-pegawai", method = RequestMethod.GET)
     public ModelAndView autoCheckAndAdd(Authentication authentication, Model model){
 
-        UserModel user = userService.getUser(authentication.getName());
+//        UserModel user = userService.getUser(authentication.getName());
         JumlahPegawaiDetailResponse jumlahPegawaiDetailResponse;
 
         jumlahPegawaiDetailResponse = lowonganRestService.getJumlahPegawaiDetail();

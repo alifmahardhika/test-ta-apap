@@ -9,19 +9,9 @@ public  class Pinjaman {
     @DateTimeFormat(pattern = "yyyy-MM-dd")
     LocalDate tanggalPengajuan;
 
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    LocalDate tanggalDisetujui;
-
-    @DateTimeFormat(pattern = "yyyy-MM-dd")
-    LocalDate tanggalPengembalian;
-
     Integer jumlahPinjaman;
 
-    Integer jumlahPengembalian;
-
-    Integer status;
-
-    String userId;
+    String idUser;
 
     //SETTER GETTER
 
@@ -34,22 +24,6 @@ public  class Pinjaman {
         this.tanggalPengajuan = tanggalPengajuan;
     }
 
-    public LocalDate getTanggalDisetujui() {
-        return tanggalDisetujui;
-    }
-
-    public void setTanggalDisetujui(LocalDate tanggalDisetujui) {
-        this.tanggalDisetujui = tanggalDisetujui;
-    }
-
-    public LocalDate getTanggalPengembalian() {
-        return tanggalPengembalian;
-    }
-
-    public void setTanggalPengembalian(LocalDate tanggalPengembalian) {
-        this.tanggalPengembalian = tanggalPengembalian;
-    }
-
     public Integer getJumlahPinjaman() {
         return jumlahPinjaman;
     }
@@ -58,40 +32,22 @@ public  class Pinjaman {
         this.jumlahPinjaman = jumlahPinjaman;
     }
 
-    public Integer getJumlahPengembalian() {
-        return jumlahPengembalian;
+    public String getIdUser() {
+        return idUser;
     }
 
-    public void setJumlahPengembalian(Integer jumlahPengembalian) {
-        this.jumlahPengembalian = jumlahPengembalian;
-    }
-
-    public Integer getStatus() {
-        return status;
-    }
-
-    public void setStatus(Integer status) {
-        this.status = status;
-    }
-
-    public String getUserId() {
-        return userId;
-    }
-
-    public void setUserId(String userId) {
-        this.userId = userId;
+    public void setIdUser(String idUser) {
+        this.idUser = idUser;
     }
 
     //constructor
+
     public Pinjaman() {
-        this.tanggalDisetujui = null;
         this.tanggalPengajuan = null;
-        this.tanggalPengembalian = null;
-        this.jumlahPengembalian = 0;
         this.jumlahPinjaman = 0;
-        this.status = 0;
-        this.userId = "";
+        this.idUser = "";
     }
+
 
 //    @Override
 //    public String toString() {

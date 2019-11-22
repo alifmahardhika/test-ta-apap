@@ -25,28 +25,17 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/js/**").permitAll()
                 .antMatchers("/restoran/**").hasAnyAuthority("MERCHANT")
                 .antMatchers("/pengajuan-surat/**").hasAnyAuthority("Admin TU", "Guru", "Siswa")
-//            .anyRequest().authenticated()
             .and()
             .formLogin()
             .loginPage("/login").permitAll()
             .and()
             .logout().logoutRequestMatcher(new AntPathRequestMatcher("/logout")).logoutSuccessUrl("/login").permitAll();
-
     }
 
     @Bean
     public BCryptPasswordEncoder encoder(){
         return new BCryptPasswordEncoder();
     }
-
-//    @Autowired
-//    public void configureGlobal (AuthenticationManagerBuilder auth) throws Exception {
-//        auth.inMemoryAuthentication()
-//                .passwordEncoder(encoder())
-//                .withUser("alyaisti").password(encoder().encode("kelompokC4"))
-//                .roles("Admin TU");
-//
-//    }
 
     @Qualifier("userDetailsServiceImpl")
     @Autowired
