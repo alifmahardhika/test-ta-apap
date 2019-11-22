@@ -54,30 +54,21 @@ public class UserController {
 //    }
     
 
-//    @RequestMapping(value = "/addUser", method = RequestMethod.POST)
-//    private String addUserSubmit(@ModelAttribute UserModel user, Model model) {
-//        userService.addUser(user);
-//        model.addAttribute("username", user.getUsername());
-//        return "add-user-success";
-//
-//    }
+    @RequestMapping(value = "/addUser", method = RequestMethod.POST)
+    private String addUserSubmit(@ModelAttribute UserModel user, Authentication authentication, Model model) {
+        if (userService.getUser(user.getUsername()) == null ) {
+            userService.addUser(user);
+            model.addAttribute("username", user.getUsername());
+            return "add-user-success";
+        }
 
-//     @RequestMapping(value = "/addUser", method = RequestMethod.POST)
-//     private String addUserSubmit(@ModelAttribute UserModel user, Authentication authentication, Model model) {
-//         if (userService.getUser(user.getUsername()) == null ) {
-//             userService.addUser(user);
-//             model.addAttribute("username", user.getUsername());
-//             return "add-user-success";
-//         }
-
-//         List<RoleModel> listRole = roleService.findAll();
-//         UserModel userLogged = userService.getUser(authentication.getName());
-//         model.addAttribute("listRole", listRole);
-//         model.addAttribute("user", userLogged);
-//         model.addAttribute("errormsg", "Username tidak valid");
-//         return "admin";
-//     }
-
+        List<RoleModel> listRole = roleService.findAll();
+        UserModel userLogged = userService.getUser(authentication.getName());
+        model.addAttribute("listRole", listRole);
+        model.addAttribute("user", userLogged);
+        model.addAttribute("errormsg", "Username tidak valid");
+        return "admin";
+    }
 
 //    @RequestMapping(value = "/addUser", method = RequestMethod.POST)
 //    private String addUserSubmit(@ModelAttribute UserModel user, Model model) {

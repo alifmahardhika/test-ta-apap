@@ -18,6 +18,11 @@ public class PengajuanSuratRestServiceImpl implements PengajuanSuratRestService 
 
     @Override
     public PengajuanSuratModel createPengajuanSurat(PengajuanSuratModel pengajuanSurat) {
+        pengajuanSurat.setNomorSurat("0");
+        pengajuanSurat.setTanggalPengajuan(LocalDate.now());
+        pengajuanSurat.setTanggalDisetujui(null);
+        pengajuanSurat.setStatus(0);
+
         return pengajuanSuratDb.save(pengajuanSurat);
     }
 

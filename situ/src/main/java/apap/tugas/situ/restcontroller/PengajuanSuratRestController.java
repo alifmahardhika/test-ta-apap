@@ -1,6 +1,10 @@
 package apap.tugas.situ.restcontroller;
 
 import apap.tugas.situ.model.PengajuanSuratModel;
+import apap.tugas.situ.model.UserModel;
+import apap.tugas.situ.rest.BaseResponse;
+import apap.tugas.situ.rest.PengajuanSuratDetail;
+import apap.tugas.situ.service.*;
 import apap.tugas.situ.rest.BaseResponse;
 import apap.tugas.situ.service.JenisSuratRestService;
 import apap.tugas.situ.service.PengajuanSuratRestService;
@@ -25,6 +29,12 @@ public class PengajuanSuratRestController {
     @Autowired
     private JenisSuratRestService jsrService;
 
+    @Autowired
+    private UserService userService;
+
+    @Autowired
+    private RoleService roleService;
+
     @GetMapping("/pengajuan-surat/{nomorSurat}")
     private BaseResponse<List<PengajuanSuratModel>> retrievePengajuanSurat(@PathVariable("nomorSurat") String nomorSurat) {
         BaseResponse<List<PengajuanSuratModel>> response = new BaseResponse<>();
@@ -44,17 +54,40 @@ public class PengajuanSuratRestController {
         }
     }
 
-    @PostMapping(value = "/pengajuan-surat")
-    private PengajuanSuratModel addPengajuanSurat(@Valid @RequestBody PengajuanSuratModel pengajuanSurat, BindingResult bindingResult) {
+    @PostMapping(value = "/pengajuan-surat/add/{username}")
+    private BaseResponse<PengajuanSuratModel> addPengajuanSurat(@PathVariable(value = "username") String username, @RequestBody PengajuanSuratDetail surat, BindingResult bindingResult) {
+        BaseResponse<PengajuanSuratModel> response = new BaseResponse<>();
         if (bindingResult.hasFieldErrors()) {
             throw new ResponseStatusException(
                     HttpStatus.BAD_REQUEST, "Request body has invalid type or missing field"
             );
         } else {
-            Long idJenisSurat = pengajuanSurat.getJenisSurat().getIdJenisSurat();
+            UserModel user = new UserModel();
+            PengajuanSuratModel pengajuanSurat = new PengajuanSuratModel();
+
+            Long idJenisSurat = surat.getIdJenisSurat();
+            String keterangan = surat.getKeterangan();
+
+            if (userService.getUser(username) == null) {
+                user.setPassword("");
+                user.setUsername(username);
+                user.setRole(roleService.getRoleById(5L));
+                user.setListPengajuanSurat(new ArrayList<>());
+                userService.addUser(user);
+            } else {
+                user = userService.getUser(username);
+            }
+
             pengajuanSurat.setJenisSurat(jsrService.getJenisSuratById(idJenisSurat));
-            System.out.println(pengajuanSurat);
-            return psrService.createPengajuanSurat(pengajuanSurat);
+            pengajuanSurat.setKeterangan(keterangan);
+            pengajuanSurat.setUser(user);
+            psrService.createPengajuanSurat(pengajuanSurat);
+
+            response.setMessage("success");
+            response.setStatus(200);
+            response.setResult(pengajuanSurat);
+
+            return response;
         }
     }
 }
