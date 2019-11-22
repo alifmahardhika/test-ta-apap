@@ -1,12 +1,14 @@
 package apap.tugas.situ.rest;
 
+import java.util.Date;
+
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class SiswaDetail {
 
     @JsonIgnoreProperties("idUser")
-    private Long idUser;
+    private String idUser;
 
     private String nis;
 
@@ -14,7 +16,7 @@ public class SiswaDetail {
 
     private String tempatLahir;
 
-    private String tanggalLahir;
+    private Date tanggalLahir;
 
     private String alamat;
 
@@ -36,11 +38,11 @@ public class SiswaDetail {
         this.nama = nama;
     }
 
-    public Long getIdUser() {
+    public String getIdUser() {
         return idUser;
     }
 
-    public void setIdUser(Long idUser) {
+    public void setIdUser(String idUser) {
         this.idUser = idUser;
     }
 
@@ -52,11 +54,11 @@ public class SiswaDetail {
         this.tempatLahir = tempatLahir;
     }
 
-    public String getTanggalLahir() {
+    public Date getTanggalLahir() {
         return tanggalLahir;
     }
 
-    public void setTanggalLahir(String tanggalLahir) {
+    public void setTanggalLahir(Date tanggalLahir) {
         this.tanggalLahir = tanggalLahir;
     }
 

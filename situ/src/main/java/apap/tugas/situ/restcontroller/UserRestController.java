@@ -72,19 +72,20 @@ public class UserRestController {
     		userService.addUser(user);
     		Date birthDate = null;
     		if (tanggalLahir != null) {
-    			/*birthDate = new SimpleDateFormat("yyyy-mm-dd").parse(tanggalLahir);
+    			//birthDate = new SimpleDateFormat("yyyy-mm-dd").parse(tanggalLahir);
     			if (user.getRole().getNama().equals("Guru")) {
     				GuruDetail guru = new GuruDetail();
     				String nig = userRestService.generateKodeNIG(tanggalLahir, user.getId());
+    				DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+    				Date dateTanggal = dateFormat.parse(tanggalLahir);
     				guru.setNama(nama);
     				guru.setTempatLahir(tempatLahir);
-    				//guru.setTanggalLahir(birthDate);
-    				guru.setTanggalLahir(tanggalLahir);
+    				guru.setTanggalLahir(dateTanggal);
     				guru.setAlamat(alamat);
     				guru.setTelepon(telepon);
     				guru.setNig(nig);
-    				guru.setIdUser(Long.parseLong(user.getId()));
-    				if (userRestService.addGuru(user,guru).block().getStatus()=="200") {
+    				guru.setIdUser(user.getId());
+    				if (userRestService.addGuru(user, guru).block().getStatus()=="200") {
     					return "success";
     				}
     			}
@@ -92,41 +93,39 @@ public class UserRestController {
     			if (user.getRole().getNama().equals("Siswa")) {
     				SiswaDetail siswa = new SiswaDetail();
     				String nis = userRestService.generateKodeNIS(tanggalLahir, user.getId());
+    				DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
+    				Date dateTanggal = dateFormat.parse(tanggalLahir);
     				siswa.setNama(nama);
     				siswa.setTempatLahir(tempatLahir);
-    				siswa.setTanggalLahir(tanggalLahir);
-    				//siswa.setTanggalLahir(birthDate);
+    				siswa.setTanggalLahir(dateTanggal);
     				siswa.setAlamat(alamat);
     				siswa.setTelepon(telepon);
     				siswa.setNis(nis);
-    				siswa.setIdUser(Long.parseLong(user.getId()));
+    				siswa.setIdUser(user.getId());
     				if (userRestService.addSiswa(user, siswa).block().getStatus()=="200") {
     					return "success";
     				}
     			}
-    			*/
     			
-    			PegawaiDetail pegawai = new PegawaiDetail();
+    			if (user.getRole().getNama().equals("Pegawai")) {
+    				PegawaiDetail pegawai = new PegawaiDetail();
     				String nip = userRestService.generateKodeNIP(tanggalLahir, user.getId());
     				DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
     				Date dateTanggal = dateFormat.parse(tanggalLahir);
     				pegawai.setNama(nama);
     				pegawai.setTempatLahir(tempatLahir);
-    				//pegawai.setTanggalLahir(birthDate);
     				pegawai.setTanggalLahir(dateTanggal);
     				pegawai.setAlamat(alamat);
     				pegawai.setTelepon(telepon);
     				pegawai.setNip(nip);
-    				pegawai.setIdUser(Long.parseLong(user.getId()));
-    				System.out.println(pegawai.getIdUser() + "\n" + pegawai.getNip() + "\n" + pegawai.getNama() + "\n" +
-    				    	 pegawai.getTempatLahir() + "\n" + pegawai.getAlamat() + "\n" +pegawai.getTelepon());
+    				pegawai.setIdUser(user.getId());
     				if (userRestService.addPegawai(user, pegawai).block().getStatus()=="200") {
     					return "success";
     				}
-    			
+    			}
     		} 
     	}
-        return "view-user-profile";
+        return "adduserwebservice-success";
     }
     
   /*
