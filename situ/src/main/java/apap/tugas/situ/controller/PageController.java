@@ -56,7 +56,7 @@ public class PageController {
     public String requestPinjamanForm(Model model) {
         Pinjaman pinjaman = new Pinjaman();
         model.addAttribute("pinjaman", pinjaman);
-        return "webservice/request-pinjaman-form";
+        return "request-pinjaman-form";
     }
 
 

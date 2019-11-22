@@ -48,7 +48,14 @@ public  class Pinjaman {
         this.idUser = "";
     }
 
-
+    @Override
+    public String toString() {
+        return "Pinjaman{" +
+                "tanggalPengajuan=" + tanggalPengajuan +
+                ", jumlahPinjaman=" + jumlahPinjaman +
+                ", idUser='" + idUser + '\'' +
+                '}';
+    }
 //    @Override
 //    public String toString() {
 //        return "Pinjaman{" +
