@@ -7,6 +7,36 @@
 
 </head>
 <body>
+
+<!--modal-->
+<script type="text/javascript">
+    $(window).on('load',function()
+        {
+            $('#myModal').modal('show');
+        });
+</script>
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header" style="text-align:center">
+                <h4 class="modal-title">Sinkronisasi Kebutuhan Lowongan?</h4>
+            </div>
+            <div id="modalBody" class="modal-body" style="text-align:center">
+                <p>Lakukan pemeriksaan kebutuhan lowongan berdasarkan jumlah pegawai</p>
+                <a th:href="@{/api/lowongan/sinkronisasi}">
+                    <button type="button" class="btn btn-sm btn-primary">Sinkronisasi</button>
+                </a>
+            </div>
+            <div class="modal-footer" style="text-align:center">
+                <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
 <!--(pageTitle='Add Jenis Lowongan')-->
 <nav th:replace="fragments/fragment :: navbar"></nav>
 <br>

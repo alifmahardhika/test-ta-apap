@@ -36,4 +36,19 @@ public class LowonganServiceImpl implements LowonganService {
         System.out.println(target.getJumlah());
         lowonganDb.save(target);
     }
+
+    @Override
+    public boolean foundSimilar(LowonganModel lowonganModel){
+        List<LowonganModel> list = findAllLowongan();
+        for (LowonganModel lowongan:list){
+            if (lowongan.getIdJenis() == lowonganModel.getIdJenis() &&
+                    lowongan.getJumlah() ==lowonganModel.getJumlah() &&
+                    lowongan.getJudul().equalsIgnoreCase(lowonganModel.getJudul())
+                    )
+            {
+               return true;
+            }
+        }
+        return false;
+    }
 }
