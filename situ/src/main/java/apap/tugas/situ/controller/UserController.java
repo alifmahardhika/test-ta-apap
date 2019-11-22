@@ -135,7 +135,7 @@ public class UserController {
 
 
     @RequestMapping(value = "/addUser", method = RequestMethod.POST)
-    public String addUserSubmit(@ModelAttribute UserModel user,
+    public String addUserSubmit(Authentication authentication, @ModelAttribute UserModel user,
                                 @RequestParam(required=false) String nama,
                                 @RequestParam(required=false) String tempatLahir,
                                 @RequestParam(required=false) String tanggalLahir,

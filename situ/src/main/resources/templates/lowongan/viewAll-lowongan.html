@@ -12,11 +12,12 @@
 <script type="text/javascript">
     $(window).on('load',function()
         {
+            var role = /*[[${message}]]*/ 'default';
             $('#myModal').modal('show');
         });
 </script>
 <!-- Modal -->
-<div class="modal fade" id="myModal" role="dialog">
+<div class="modal fade" id="myModal" role="dialog" th:if="${user.getRole().getNama() == 'Admin TU'}">
     <div class="modal-dialog">
 
         <!-- Modal content-->
@@ -36,6 +37,7 @@
         </div>
     </div>
 </div>
+
 
 <!--(pageTitle='Add Jenis Lowongan')-->
 <nav th:replace="fragments/fragment :: navbar"></nav>

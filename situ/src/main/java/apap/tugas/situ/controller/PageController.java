@@ -52,7 +52,7 @@ public class PageController {
         return "admin";
     }
 
-    @RequestMapping(value = "/request-pinjaman-form", method = RequestMethod.GET)
+    @RequestMapping(value = "/api/request-pinjaman-form", method = RequestMethod.GET)
     public String requestPinjamanForm(Model model) {
         Pinjaman pinjaman = new Pinjaman();
         model.addAttribute("pinjaman", pinjaman);

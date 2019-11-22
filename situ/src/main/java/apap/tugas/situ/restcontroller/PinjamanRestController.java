@@ -37,9 +37,7 @@ public class PinjamanRestController {
 
     @PostMapping(value = "/buat-pinjaman")
     private ModelAndView createPinjaman(Authentication authentication, @Valid Pinjaman pinjaman, BindingResult bindingResult, Model model){
-        System.out.println("===============disini");
         if (bindingResult.hasFieldErrors()){
-            System.out.println("=======================================");
             System.out.println(pinjaman.toString());
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Request Body has invalid type or missing field");
         }
@@ -64,12 +62,9 @@ public class PinjamanRestController {
             PinjamanResponseDetail response = gson.fromJson(object, PinjamanResponseDetail.class);
             System.out.println(res);
 
-            System.out.println("======================================================================");
-            System.out.println("======================================================================");
-
             System.out.println(response.getResult().getJumlahPinjaman());
 
-            if (response.getResult().getStatus() == 200){//berhasil
+            if (response.getStatus().equals("200")){//berhasil
 
                 model.addAttribute("jumlahPinjaman", response.getResult().getJumlahPinjaman());
                 ModelAndView modelAndView = new ModelAndView();

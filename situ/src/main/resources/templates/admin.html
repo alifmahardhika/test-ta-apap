@@ -15,6 +15,14 @@
 	    <div class="row">
 	        <div class="col-md-6">
 	            <div class="card">
+					<div class="card-header">Buat Permintaan Peminjaman Dana</div>
+					<div class="card-body">
+						<a th:href="@{/api/request-pinjaman-form}">
+							<button type="button" class="btn btn-sm btn-primary">Buat Peminjaman</button>
+						</a>
+					</div>
+				</div>
+
 	                <div class="card-header">Yuk, Tambah User Baru!</div>
 	                <div class="card-body">
 	                    <form th:action="@{/user/addUser}" method="POST">

@@ -2,12 +2,15 @@ package apap.tugas.situ.controller;
 
 import apap.tugas.situ.model.JenisLowonganModel;
 import apap.tugas.situ.model.LowonganModel;
+import apap.tugas.situ.model.UserModel;
 import apap.tugas.situ.rest.JumlahPegawaiDetailResponse;
 import apap.tugas.situ.service.JenisLowonganService;
 import apap.tugas.situ.service.LowonganRestService;
 import apap.tugas.situ.service.LowonganService;
+import apap.tugas.situ.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -22,6 +25,9 @@ public class LowonganController {
 
     @Autowired
     private LowonganRestService lowonganRestService;
+
+    @Autowired
+    private UserService userService;
 
 
     @Autowired
@@ -67,9 +73,11 @@ public class LowonganController {
     }
 
     @RequestMapping(value = "lowongan/view-all", method = RequestMethod.GET)
-    public String viewAll(Model model) {
+    public String viewAll(Model model, Authentication authentication) {
         List<LowonganModel> allLowongan = lowonganService.findAllLowongan();
         model.addAttribute("listLowongan", allLowongan);
+        UserModel user = userService.getUser(authentication.getName());
+        model.addAttribute("user", user);
         return "lowongan/viewAll-lowongan";
     }
 
