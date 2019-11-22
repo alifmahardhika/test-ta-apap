@@ -58,76 +58,7 @@ public class UserRestController {
 //    }
 
 
-    @RequestMapping(value = "/addUser", method = RequestMethod.POST)
-    public String addUserSubmit(@ModelAttribute UserModel user,
-    		@RequestParam(required=false) String nama,
-    		@RequestParam(required=false) String tempatLahir, 
-    		@RequestParam(required=false) String tanggalLahir, 
-    		@RequestParam(required=false) String alamat,
-    		@RequestParam(required=false) String telepon, Model model) throws ParseException, java.text.ParseException {
-    	
-    	if (userService.getUser(user.getUsername()) != null) {
-    		return "error";
-    	} else {
-    		userService.addUser(user);
-    		Date birthDate = null;
-    		if (tanggalLahir != null) {
-    			//birthDate = new SimpleDateFormat("yyyy-mm-dd").parse(tanggalLahir);
-    			if (user.getRole().getNama().equals("Guru")) {
-    				GuruDetail guru = new GuruDetail();
-    				String nig = userRestService.generateKodeNIG(tanggalLahir, user.getId());
-    				DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
-    				Date dateTanggal = dateFormat.parse(tanggalLahir);
-    				guru.setNama(nama);
-    				guru.setTempatLahir(tempatLahir);
-    				guru.setTanggalLahir(dateTanggal);
-    				guru.setAlamat(alamat);
-    				guru.setTelepon(telepon);
-    				guru.setNig(nig);
-    				guru.setIdUser(user.getId());
-    				if (userRestService.addGuru(user, guru).block().getStatus()=="200") {
-    					return "success";
-    				}
-    			}
-    			
-    			if (user.getRole().getNama().equals("Siswa")) {
-    				SiswaDetail siswa = new SiswaDetail();
-    				String nis = userRestService.generateKodeNIS(tanggalLahir, user.getId());
-    				DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
-    				Date dateTanggal = dateFormat.parse(tanggalLahir);
-    				siswa.setNama(nama);
-    				siswa.setTempatLahir(tempatLahir);
-    				siswa.setTanggalLahir(dateTanggal);
-    				siswa.setAlamat(alamat);
-    				siswa.setTelepon(telepon);
-    				siswa.setNis(nis);
-    				siswa.setIdUser(user.getId());
-    				if (userRestService.addSiswa(user, siswa).block().getStatus()=="200") {
-    					return "success";
-    				}
-    			}
-    			
-    			if (user.getRole().getNama().equals("Pegawai")) {
-    				PegawaiDetail pegawai = new PegawaiDetail();
-    				String nip = userRestService.generateKodeNIP(tanggalLahir, user.getId());
-    				DateFormat dateFormat = new SimpleDateFormat("yyyy-mm-dd");
-    				Date dateTanggal = dateFormat.parse(tanggalLahir);
-    				pegawai.setNama(nama);
-    				pegawai.setTempatLahir(tempatLahir);
-    				pegawai.setTanggalLahir(dateTanggal);
-    				pegawai.setAlamat(alamat);
-    				pegawai.setTelepon(telepon);
-    				pegawai.setNip(nip);
-    				pegawai.setIdUser(user.getId());
-    				if (userRestService.addPegawai(user, pegawai).block().getStatus()=="200") {
-    					return "success";
-    				}
-    			}
-    		} 
-    	}
-        return "adduserwebservice-success";
-    }
-    
+
   /*
     @RequestMapping(value = "/profil", method = RequestMethod.GET)
     public String viewUser(Authentication authentication, Model model){

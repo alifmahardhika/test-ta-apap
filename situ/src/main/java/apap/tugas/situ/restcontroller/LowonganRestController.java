@@ -45,7 +45,6 @@ public class LowonganRestController {
 
         jumlahPegawaiDetailResponse = lowonganRestService.getJumlahPegawaiDetail();
         int jumlah = lowonganRestService.getIntJumlah(jumlahPegawaiDetailResponse);
-        System.out.println("masuk controller bagian getjumlah");
         if (jumlah < 5){
             String closeDate = "";
             LocalDate dateNow = LocalDate.now();
