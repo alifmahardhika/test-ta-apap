@@ -2,14 +2,7 @@ package apap.tugas.situ.service;
 
 
 import apap.tugas.situ.model.UserModel;
-import apap.tugas.situ.rest.GuruDetail;
-import apap.tugas.situ.rest.GuruDetailResponse;
-
-import apap.tugas.situ.rest.BaseResponse;
-
-import apap.tugas.situ.rest.PegawaiDetail;
-import apap.tugas.situ.rest.PegawaiDetailResponse;
-import apap.tugas.situ.rest.Setting;
+import apap.tugas.situ.rest.*;
 
 import org.json.JSONObject;
 import org.springframework.http.MediaType;
@@ -40,7 +33,7 @@ public class UserRestServiceImpl implements UserRestService {
                 .concat(uuid);
     }
     
-    /*
+
     
     @Override
     public String generateKodeNIS(String tanggalLahir, String uuid) {
@@ -66,7 +59,6 @@ public class UserRestServiceImpl implements UserRestService {
                 .concat(uuid);
     }
 
-*/
 
     private char generateRandomChar(){
         Random random = new Random();
@@ -81,17 +73,6 @@ public class UserRestServiceImpl implements UserRestService {
     public UserRestServiceImpl(WebClient.Builder webClientBuilder){
         this.webClient = webClientBuilder.baseUrl(Setting.sivitasUrl).build();
     }
-
-//    @Override
-//    public Mono<PegawaiDetail> getPegawai(String uuid) {
-//        try {
-//            return this.webClient.get().uri("/employees/" + uuid)
-//                    .retrieve().bodyToMono(PegawaiDetail.class);
-//        }
-//        catch (NullPointerException e){
-//            return null;
-//        }
-//    }
     
     @Override
     public Mono<PegawaiDetailResponse> addPegawai(UserModel user, PegawaiDetail pegawai) {
@@ -115,17 +96,29 @@ public class UserRestServiceImpl implements UserRestService {
     }
     
     @Override
-    public Map<String, String> getPegawai(String uuid) {
+    public Map<String, Object> getAllUsers(String roles) {
         try {
-            return this.webClient.get().uri("/employees/" + uuid)
+            return this.webClient.get().uri(Setting.sivitasUrl + "/" + roles)
                     .retrieve().bodyToMono(Map.class).block();
         }
         catch (NullPointerException e){
             return null;
         }
     }
-    
-    /*
+
+    @Override
+    public Map<String, String> getUser(String uuid, String roles) {
+        try {
+            return this.webClient.get().uri(Setting.sivitasUrl + "/" + roles + "/" + uuid)
+                    .retrieve().bodyToMono(Map.class).block();
+        }
+        catch (NullPointerException e){
+            return null;
+        }
+    }
+
+
+
     @Override
     public Mono<SiswaDetailResponse> addSiswa(UserModel user, SiswaDetail siswa) {
     	// MultiValueMap<String, String> data = new LinkedMultiValueMap<>();
@@ -143,7 +136,7 @@ public class UserRestServiceImpl implements UserRestService {
                  .retrieve()
                  .bodyToMono(SiswaDetailResponse.class);
     }
-    
+
     public Mono<GuruDetailResponse> addGuru(UserModel user, GuruDetail guru) {
 	   	 MultiValueMap<String, String> data = new LinkedMultiValueMap<>();
 	   	 data.add("idUser", user.getId());
@@ -158,7 +151,7 @@ public class UserRestServiceImpl implements UserRestService {
 	                .syncBody(data.toString())
 	                .retrieve()
 	                .bodyToMono(GuruDetailResponse.class);
-   }*/
+   }
 
 
 }
