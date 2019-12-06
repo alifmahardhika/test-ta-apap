@@ -1,9 +1,7 @@
 package apap.tugas.situ.service;
 
-import apap.tugas.situ.model.JenisSuratModel;
 import apap.tugas.situ.model.PengajuanSuratModel;
 import apap.tugas.situ.model.UserModel;
-import apap.tugas.situ.repository.JenisSuratDb;
 import apap.tugas.situ.repository.PengajuanSuratDb;
 import org.apache.commons.lang.RandomStringUtils;
 import org.apache.tomcat.jni.Local;
@@ -56,12 +54,7 @@ public class PengajuanSuratServiceImpl implements PengajuanSuratService {
     }
 
     @Override
-    public List<PengajuanSuratModel> getAllPengajuanSuratByStatus(Integer status) {
-        return psdb.findAllByStatus(status);
-    }
-
-    @Override
-    public PengajuanSuratModel changeStatusPengajuanSurat(Long id, Integer status){
+    public PengajuanSuratModel changeStatusPengajuanSurat(Long id, Integer status) {
         PengajuanSuratModel targetPS = getPengajuanSuratById(id);
         String nomorSuratBaru = "";
         List<PengajuanSuratModel> pengajuanSuratList = getPengajuanSuratList();

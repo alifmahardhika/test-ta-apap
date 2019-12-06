@@ -48,10 +48,10 @@ public class LowonganModel implements Serializable {
 
     //forign key many to one ke user
     //karena belum implement user maka di comment dulu
-//    @NotNull
-//    @Size(max = 200)
-//    @Column(name = "uuidUser", nullable = false)
-//    private String uuidUser;
+    @NotNull
+    @Size(max = 200)
+    @Column(name = "uuidUser", nullable = false)
+    private String uuidUser;
 
     //setter and getter
 
@@ -112,13 +112,13 @@ public class LowonganModel implements Serializable {
         this.idJenis = idJenisLowongan;
     }
 
-//    public String getUuidUser() {
-//        return uuidUser;
-//    }
-//
-//    public void setUuidUser(String uuidUser) {
-//        this.uuidUser = uuidUser;
-//    }
+    public String getUuidUser() {
+        return uuidUser;
+    }
+
+    public void setUuidUser(String uuidUser) {
+        this.uuidUser = uuidUser;
+    }
 
 
     @Override

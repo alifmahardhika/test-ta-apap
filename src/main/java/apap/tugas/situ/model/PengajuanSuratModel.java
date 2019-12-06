@@ -36,7 +36,6 @@ public class PengajuanSuratModel implements Serializable {
     @Column(name = "keterangan", nullable = false)
     private String keterangan;
 
-    @JsonIgnore
     @NotNull
     @Column(name = "status", nullable = false)
     private Integer status;

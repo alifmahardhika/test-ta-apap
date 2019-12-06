@@ -122,7 +122,7 @@ public class UserController {
           model.addAttribute("listRole", listRole);
           model.addAttribute("user", userLogged);
           model.addAttribute("errormsg", "Username tidak valid");
-          return "admin";
+              return "admin";
 //             return "error";
         } else {
             userService.addUser(user);

@@ -10,31 +10,26 @@
 <body>
 <h1 class="text-center font-weight-bold m-3">Daftar Pengajuan Surat</h1>
 <div class="container-fluid">
-
     <table class="table">
         <thead>
-        <tr>
-            <th>No</th>
-            <th>Nomor Surat</th>
-            <th>Keterangan</th>
-            <th>Jenis Surat</th>
-            <th>Tanggal Pengajuan</th>
-            <th>Tanggal Disetujui</th>
-            <th>Status</th>
-            <th></th>
-        </tr>
+            <tr>
+                <th>No</th>
+                <th>Nomor Surat</th>
+                <th>Keterangan</th>
+                <th>Jenis Surat</th>
+                <th>Tanggal Pengajuan</th>
+                <th>Tanggal Disetujui</th>
+                <th>Status</th>
+                <th></th>
+            </tr>
         </thead>
         <tbody>
-
-            <tr th:if="${kosong!=null}">
-                <td colspan="6" text-center th:text="${kosong}"></td>
-            </tr>
-            <tr th:each="surat, itr : ${list}" th:if="${kosong!=null}">
-                <td th:text="${itr.count}" ></td>
-                <td th:text="${surat.nomorSurat}" ></td>
-                <td th:text="${surat.keterangan}" ></td>
-                <td th:text="${surat.jenisSurat.nama}" ></td>
-                <td th:text="${surat.tanggalPengajuan}" ></td>
+            <tr th:each="surat, itr : ${list}">
+                <td th:text="${itr.count}"></td>
+                <td th:text="${surat.nomorSurat}"></td>
+                <td th:text="${surat.keterangan}"></td>
+                <td th:text="${surat.jenisSurat.nama}"></td>
+                <td th:text="${surat.tanggalPengajuan}"></td>
                 <td th:text="${surat.tanggalDisetujui == null} ? 'Belum disetujui' : ${surat.tanggalDisetujui}"></td>
                 <td th:switch="${surat.status}">
                     <p th:case="0">Menunggu persetujuan</p>
@@ -45,19 +40,16 @@
                 </td>
                 <td style="white-space: nowrap;">
                     <div class="row" style="width:100%">
-
-                        <div class="col-sm-2" th:if="${surat.status==0}">
                             <a th:href="@{/pengajuan-surat/delete/} + ${surat.id}">
                                 <button type="button" class="btn btn-sm btn-warning">Delete</button>
                             </a>
-                            
-                        </div>
-                      <a th:href="@{/pengajuan-surat/change/} + ${surat.id}" th:if="${surat.status == 2}">
-                              <button type="button" class="btn btn-sm btn-info ml-2">Change Status</button>
-                          </a>
-                </div>
-            </td>
-        </tr>
+                            <a th:href="@{/pengajuan-surat/change/} + ${surat.id}" th:if="${()}">
+                                <button type="button" class="btn btn-sm btn-info ml-2">Change Status</button>
+                            </a>
+
+                    </div>
+                </td>
+            </tr>
         </tbody>
     </table>
     <a th:href="@{/pengajuan-surat/add}" class="btn btn-large btn-dark" style="float:right">Tambah Pengajuan Surat</a>

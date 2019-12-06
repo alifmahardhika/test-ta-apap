@@ -12,4 +12,5 @@ public interface PengajuanSuratDb extends JpaRepository<PengajuanSuratModel, Lon
     Optional<PengajuanSuratModel> findById(Long id);
     List<PengajuanSuratModel> findAllByNomorSurat(String nomorSurat);
     List<PengajuanSuratModel> findAllByUser(UserModel user);
+    List<PengajuanSuratModel> findAllByStatus(Integer status);
 }
