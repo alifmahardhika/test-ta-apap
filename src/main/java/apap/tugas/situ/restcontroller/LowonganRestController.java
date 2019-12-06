@@ -40,7 +40,8 @@ public class LowonganRestController {
     @RequestMapping(value = "/jumlah-pegawai", method = RequestMethod.GET)
     public ModelAndView autoCheckAndAdd(Authentication authentication, Model model){
 
-//        UserModel user = userService.getUser(authentication.getName());
+        UserModel user = userService.getUser(authentication.getName());
+        System.out.println("SHOUT=========================================> " + user.getId());
         JumlahPegawaiDetailResponse jumlahPegawaiDetailResponse;
 
         jumlahPegawaiDetailResponse = lowonganRestService.getJumlahPegawaiDetail();
@@ -71,6 +72,7 @@ public class LowonganRestController {
             Long idJenisPustakawan = jenisLowonganService.findIdByNama("Pustakawan");
             LowonganModel automatedCreation = new LowonganModel("Lowongan Pustakawan", dateNow, closingDate, "Dibutuhkan Pustakawan Cakap", 5-jumlah, idJenisPustakawan );
 
+            automatedCreation.setUuidUser(user.getId());
             if (lowonganService.foundSimilar(automatedCreation)){
                 System.out.println("=====================udah ada lowongan dengan jumlah dan judul dan jenis dan tanggal yg sama");
                 model.addAttribute("judulLowongan", automatedCreation.getJudul());
