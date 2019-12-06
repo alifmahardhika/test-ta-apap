@@ -55,7 +55,6 @@ public class LowonganController {
         return "lowongan/add-lowongan";
     }
 
-
     @RequestMapping(value = "/lowongan/ubah-jumlah/{idLowongan}", method = RequestMethod.GET)
     public String changeLowongan(@PathVariable Long idLowongan, Model model) {
         System.out.println("=========================================");
