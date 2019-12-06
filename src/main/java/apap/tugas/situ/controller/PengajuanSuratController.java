@@ -56,6 +56,9 @@ public class PengajuanSuratController {
             return "pengajuan-surat/view-pengajuan-surat";
         }
         List<PengajuanSuratModel> listPengajuanSurat = pengajuanSuratService.getPengajuanSuratList();
+        if (listPengajuanSurat.isEmpty()){
+            model.addAttribute("kosong", "Belum ada surat" );
+        }
         model.addAttribute("list", listPengajuanSurat);
         return "pengajuan-surat/view-pengajuan-surat";
     }
