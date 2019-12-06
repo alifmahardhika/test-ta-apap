@@ -40,12 +40,12 @@
                 </td>
                 <td style="white-space: nowrap;">
                     <div class="row" style="width:100%">
-
-                        <div class="col-sm-2">
                             <a th:href="@{/pengajuan-surat/delete/} + ${surat.id}">
                                 <button type="button" class="btn btn-sm btn-warning">Delete</button>
                             </a>
-                        </div>
+                            <a th:href="@{/pengajuan-surat/change/} + ${surat.id}" th:if="${()}">
+                                <button type="button" class="btn btn-sm btn-info ml-2">Change Status</button>
+                            </a>
 
                     </div>
                 </td>

@@ -4,6 +4,7 @@ import apap.tugas.situ.model.JenisSuratModel;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class PengajuanSuratDetail {
+    @JsonProperty
     private String status;
 
     @JsonProperty
