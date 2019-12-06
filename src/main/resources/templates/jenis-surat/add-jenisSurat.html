@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeLeaf.org">
+    <head>
+    <title id="pageTitle">Add Jenis Surat</title>
+        <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+        <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+    </head>
+    <body>
+        <nav th:replace="fragments/fragment :: navbar"></nav>
+        <div class="container mt-5">
+            <h2 th:text="'Sukses!'" style="text-align: center;"></h2>
+            <p th:text="'Jenis Surat telah ditambahkan.'" style="text-align: center;"></p>
+            <a th:href="@{/jenis-surat/view-all}" class="mt-3" style="color: slateblue; text-align: center">Lihat seluruh Jenis Surat</a>
+        </div>
+    <div>
+
+    </div>
+    </body>
+</html>

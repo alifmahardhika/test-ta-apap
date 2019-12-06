@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Tambah Lowongan</title>
+    <!-- jquery, ajax, and bootstrap.js -->
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<!--(pageTitle='Tambah Jenis Lowongan')-->
+<nav th:replace="fragments/fragment :: navbar "></nav>
+
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-6 center">
+            <div class="card">
+                <div class="card-header">Ubah Jumlah Lowongan</div>
+                <div class="card-body">
+                    <form th:action="@{/lowongan/ubah-jumlah/{idLowongan}(idLowongan=${idUpdated})}" th:object="${lowongan}" method="POST">
+                        <input type="hidden" th:field="${lowongan.idLowongan}" />
+                        <input type="hidden" th:field="${lowongan.judul}" />
+                        <input type="hidden" th:field="${lowongan.tanggalDibuka}" />
+                        <input type="hidden" th:field="${lowongan.tanggalDitutup}" />
+                        <input type="hidden" th:field="${lowongan.keterangan}" />
+                        <input type="hidden" th:field="${lowongan.idJenis}" />
+
+
+                        <label> Jumlah Lowongan </label>
+                        <input type="number" name="jumlah" class="form-control" th:value="${lowongan.jumlah}"/>
+                        <br>
+
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</body>
+
+<footer th:replace="fragments/fragment :: footer"></footer>
+</html>

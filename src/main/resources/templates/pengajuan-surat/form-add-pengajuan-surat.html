@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Add Pengajuan Surat</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+</head>
+<body>
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<div class="container-fluid">
+    <div class="container mt-5">
+        <div class="row">
+            <div class="col-md-6 center">
+                <div class="card">
+                    <div class="card-header">Tambah Pengajuan Surat Baru</div>
+                    <div class="card-body">
+                        <form th:action="@{/pengajuan-surat/add}" th:object="${pengajuanSurat}" method="POST">
+                            <label> Jenis Surat </label>
+                            <select class="form-control" name="idJenisSurat">
+                                <option selected value="">-- Pilih Jenis Surat --</option>
+                                <option th:each="jenis : ${listJenis}" th:value="${jenis.idJenisSurat}" th:text="${jenis.nama}"></option>
+                            </select>
+                            <br>
+
+                            <label> Keterangan </label>
+                            <input type="text" name="keterangan" class="form-control"/>
+                            <br>
+                            <button type="submit" class="btn btn-primary">Simpan</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+<footer th:replace="fragments/fragment :: footer"></footer>
+</div>
+</body>
+</html>
