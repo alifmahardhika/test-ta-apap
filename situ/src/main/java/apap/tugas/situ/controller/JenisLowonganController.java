@@ -37,7 +37,8 @@ public class JenisLowonganController {
         }
 
         model.addAttribute("namaJenis", jenisLowonganModel.getNama());
-        return "add-jenis-lowongan-fail";
+        model.addAttribute("alasan", "Error! Terdapat nama Jenis Lowongan yang sama pada Database!");
+        return "error";
     }
 
     @RequestMapping(value = "/jenis-lowongan/delete/{idJenis}")
@@ -61,7 +62,7 @@ public class JenisLowonganController {
     public String viewAll(Model model) {
         List<JenisLowonganModel> allJenis = jenisLowonganService.findAllJenis();
         model.addAttribute("listJenis", allJenis);
-        return "jenisLowongan/viewAll";
+        return "jenisLowongan/viewall-jenisLowongan";
     }
 
 }

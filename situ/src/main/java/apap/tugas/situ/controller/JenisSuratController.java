@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Qualifier;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -20,17 +21,25 @@ public class JenisSuratController {
     @Autowired
     private JenisSuratService jenisSuratService;
 
+    @Autowired
+    private UserService userService;
+
+
     @RequestMapping(value = "/jenis-surat/view-all", method = RequestMethod.GET)
-    public String viewAllJenisSurat(Model model) {
+    public String viewAllJenisSurat(Authentication authentication, Model model) {
     	List<JenisSuratModel> jenisSuratList = jenisSuratService.getJenisSuratList();
+        UserModel user = userService.getUser(authentication.getName());
     	model.addAttribute("jenisSuratList", jenisSuratList);
+        model.addAttribute("user", user);
         return "jenis-surat/viewall-jenisSurat";
     }
     
     @RequestMapping(value = "/jenis-surat/add", method = RequestMethod.GET)
-    public String addJenisSuratFormPage(Model model) {
+    public String addJenisSuratFormPage(Authentication authentication, Model model) {
         JenisSuratModel jenisSurat = new JenisSuratModel();
+        UserModel user = userService.getUser(authentication.getName());
         model.addAttribute("jenisSurat", jenisSurat);
+        model.addAttribute("user", user);
         return "jenis-surat/form-add-jenisSurat";
     }
     
@@ -53,5 +62,6 @@ public class JenisSuratController {
         jenisSuratService.deleteJenisSurat(idJenisSurat);
         model.addAttribute("namaSurat", jenisSurat.getNama());
         return "jenis-surat/hapus-jenisSurat";
-    }   
+    }
+
 }

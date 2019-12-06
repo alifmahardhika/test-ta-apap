@@ -203,6 +203,10 @@ public class UserController {
 
         } else if (user.getRole().getId().equals(4L)){
             role = "students";
+        } else {
+            model.addAttribute("user", user);
+            return "view-user-profile";
+
         }
 
         Map<String, Object> allProfile = userRestService.getAllUsers(role);
@@ -215,8 +219,6 @@ public class UserController {
         if(listUuid.contains(userId)){
             profil = userRestService.getUser(userId, role);
             model.addAttribute("sisivitas", "Ada");
-            System.out.println(listUuid);
-            System.out.println(profil);
         }else {
             profil = null;
         }
