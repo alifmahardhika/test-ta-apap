@@ -25,6 +25,7 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
                 .antMatchers("/js/**").permitAll()
                 .antMatchers("/restoran/**").hasAnyAuthority("MERCHANT")
                 .antMatchers("/pengajuan-surat/**").hasAnyAuthority("Admin TU", "Guru", "Siswa")
+                .antMatchers("/pengajuan-surat/change/**").hasAnyAuthority("Admin TU", "Kepala Sekolah")
                 .antMatchers("/api/**").hasAnyAuthority("Admin TU")
 
                 .anyRequest().authenticated()

@@ -10,7 +10,6 @@
 <body>
 <h1 class="text-center font-weight-bold m-3">Daftar Pengajuan Surat</h1>
 <div class="container-fluid">
-
     <table class="table">
         <thead>
         <tr>
@@ -41,10 +40,7 @@
             </td>
             <td style="white-space: nowrap;">
                 <div class="row" style="width:100%">
-                    <a th:href="@{/pengajuan-surat/delete/} + ${surat.id}">
-                        <button type="button" class="btn btn-sm btn-warning">Delete</button>
-                    </a>
-                    <a th:href="@{/pengajuan-surat/change/} + ${surat.id}" th:if="${surat.status == 2}">
+                    <a th:href="@{/pengajuan-surat/change/} + ${surat.id}" th:if="${surat.status == 0}">
                         <button type="button" class="btn btn-sm btn-info ml-2">Change Status</button>
                     </a>
 
@@ -53,7 +49,6 @@
         </tr>
         </tbody>
     </table>
-    <a th:href="@{/pengajuan-surat/add}" class="btn btn-large btn-dark" style="float:right">Tambah Pengajuan Surat</a>
 </div>
 <footer th:replace="fragments/fragment :: footer"></footer>
 </body>
