@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Daftar Pengajuan Surat</title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+    <nav th:replace="fragments/fragment :: navbar"></nav>
+</head>
+<body>
+<h1 class="text-center font-weight-bold m-3">Daftar Pengajuan Surat</h1>
+<div class="container-fluid">
+    <table class="table">
+        <thead>
+            <tr>
+                <th>No</th>
+                <th>Nomor Surat</th>
+                <th>Keterangan</th>
+                <th>Jenis Surat</th>
+                <th>Tanggal Pengajuan</th>
+                <th>Tanggal Disetujui</th>
+                <th>Status</th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="surat, itr : ${list}">
+                <td th:text="${itr.count}"></td>
+                <td th:text="${surat.nomorSurat}"></td>
+                <td th:text="${surat.keterangan}"></td>
+                <td th:text="${surat.jenisSurat.nama}"></td>
+                <td th:text="${surat.tanggalPengajuan}"></td>
+                <td th:text="${surat.tanggalDisetujui == null} ? 'Belum disetujui' : ${surat.tanggalDisetujui}"></td>
+                <td th:switch="${surat.status}">
+                    <p th:case="0">Menunggu persetujuan</p>
+                    <p th:case="1">Ditolak</p>
+                    <p th:case="2">Disetujui</p>
+                    <p th:case="3">Diproses</p>
+                    <p th:case="4">Menunggu persetujuan</p>
+                </td>
+                <td style="white-space: nowrap;">
+                    <div class="row" style="width:100%">
+
+                        <div class="col-sm-2">
+                            <a th:href="@{/pengajuan-surat/delete/} + ${surat.id}">
+                                <button type="button" class="btn btn-sm btn-warning">Delete</button>
+                            </a>
+                        </div>
+
+                    </div>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+    <a th:href="@{/pengajuan-surat/add}" class="btn btn-large btn-dark" style="float:right">Tambah Pengajuan Surat</a>
+</div>
+<footer th:replace="fragments/fragment :: footer"></footer>
+</body>
+</html>

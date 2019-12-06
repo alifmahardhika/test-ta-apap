@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html xmlns:th="http://thymeLeaf.org">
+<head>
+    <title> Daftar Lowongan </title>
+    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
+    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
+
+</head>
+<body>
+
+<!--modal-->
+<script type="text/javascript">
+    $(window).on('load',function()
+        {
+            var role = /*[[${message}]]*/ 'default';
+            $('#myModal').modal('show');
+        });
+</script>
+<!-- Modal -->
+<div class="modal fade" id="myModal" role="dialog" th:if="${user.getRole().getNama() == 'Admin TU'}">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header" style="text-align:center">
+                <h4 class="modal-title">Sinkronisasi Kebutuhan Lowongan?</h4>
+            </div>
+            <div id="modalBody" class="modal-body" style="text-align:center">
+                <p>Lakukan pemeriksaan kebutuhan lowongan berdasarkan jumlah pegawai</p>
+                <a th:href="@{/api/lowongan/sinkronisasi}">
+                    <button type="button" class="btn btn-sm btn-primary">Sinkronisasi</button>
+                </a>
+            </div>
+            <div class="modal-footer" style="text-align:center">
+                <button type="button" class="btn btn-sm btn-danger" data-dismiss="modal">Close</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+<!--(pageTitle='Add Jenis Lowongan')-->
+<nav th:replace="fragments/fragment :: navbar"></nav>
+<br>
+
+<br>
+<div class="card-header bg bg-dark">
+    <p style="color: white; size: 12px;">Daftar Lowongan</p>
+</div>
+
+
+<div class="container-fluid" align="center">
+    <table class="table">
+        <thead>
+        <tr>
+            <th scope="col">No</th>
+            <th scope="col">Judul</th>
+            <th scope="col">Keterangan</th>
+            <th scope="col">Tanggal Dibuka</th>
+            <th scope="col">Tanggal Ditutup</th>
+            <th scope="col">Jumlah</th>
+            <!--<th scope="col">Jenis Lowongan</th></th>-->
+            <th scope="col"></th>
+
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:object="${lowongan}" th:each="lowongan, iterationStatus : *{listLowongan }">
+            <td th:text="${iterationStatus.count}"></td>
+            <td th:text="${lowongan.judul}" th:value="${lowongan.judul}" ></td>
+            <td th:text="${lowongan.keterangan}"></td>
+            <td th:text="${lowongan.tanggalDibuka}"></td>
+            <td th:text="${lowongan.tanggalDitutup}"></td>
+            <td th:text="${lowongan.jumlah}"></td>
+            <!--<td th:text="${lowongan.getIdJenis()}"></td>-->
+            <td style="white-space: nowrap;">
+                <div class="row" style="width:100%">
+
+                    <div class="col-sm-2">
+                        <a th:href="@{/lowongan/ubah-jumlah/} + ${lowongan.idLowongan}">
+                            <button type="button" class="btn btn-sm btn-secondary">Ubah Jumlah</button>
+                        </a>
+                    </div>
+
+                </div>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+</body>
+<footer th:replace="fragments/fragment :: footer"></footer>
+</html>
