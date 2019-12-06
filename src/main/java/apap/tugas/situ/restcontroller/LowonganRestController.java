@@ -51,14 +51,21 @@ public class LowonganRestController {
             String[] dateStr = dateNow.toString().split("-");
 
             //cek bulan trus bikin close date
-            if (Integer.parseInt(dateStr[1]) < 12){
+            if (Integer.parseInt(dateStr[1]) < 10){
+
+                int monthPlusOne = Integer.parseInt(dateStr[1]) + 1;
+                dateStr[1] = "0" + monthPlusOne;
+                closeDate = "" + dateStr[0] + "-" +dateStr[1] + "-" + dateStr[2];
+            }
+
+            else if (Integer.parseInt(dateStr[1]) < 12 && Integer.parseInt(dateStr[1]) > 9 ){
 
                 int monthPlusOne = Integer.parseInt(dateStr[1]) + 1;
                 dateStr[1] = "" + monthPlusOne;
                 closeDate = "" + dateStr[0] + "-" +dateStr[1] + "-" + dateStr[2];
             }
             else{   //dari desember satu bulan = januari
-                closeDate = "" + dateStr[0] + "-" +1 + "-" + dateStr[2];
+                closeDate = "" + dateStr[0] + "-" + "01" + "-" + dateStr[2];
             }
             LocalDate closingDate = LocalDate.parse(closeDate);
             Long idJenisPustakawan = jenisLowonganService.findIdByNama("Pustakawan");
