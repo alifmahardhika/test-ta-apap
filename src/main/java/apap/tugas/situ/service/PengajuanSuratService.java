@@ -6,6 +6,8 @@ import apap.tugas.situ.model.UserModel;
 import java.util.List;
 
 public interface PengajuanSuratService {
+    PengajuanSuratModel getPengajuanSuratById(Long idPengajuanSurat);
+
     void addPengajuanSurat(PengajuanSuratModel pengajuanSuratModel);
 
     List<PengajuanSuratModel> getPengajuanSuratList();
@@ -14,4 +16,7 @@ public interface PengajuanSuratService {
 
     List<PengajuanSuratModel> getPengajuanSuratListByUser(UserModel user);
 
+    PengajuanSuratModel changeStatusPengajuanSurat(Long id, Integer status);
+
+    List<PengajuanSuratModel> getAllPengajuanSuratByStatus(Integer status);
 }
