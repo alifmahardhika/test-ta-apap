@@ -52,8 +52,11 @@ public class PinjamanRestController {
             HttpHeaders headers = new HttpHeaders();
             headers.setAccept(Arrays.asList(MediaType.APPLICATION_JSON));
             HttpEntity<Pinjaman> entity = new HttpEntity<Pinjaman>(pinjaman,headers);
-            String res = restTemplate.exchange("https://b0e8cbdc-ae36-4281-85c3-be57c1219010.mock.pstmn.io/api/v1/pinjaman/tambah", HttpMethod.POST, entity, String.class).getBody();
-
+            System.out.println("099999999999999999999 ");
+            System.out.println(pinjaman.toString());
+            String res = restTemplate.exchange("https://c-5-si-koperasi.herokuapp.com/api/v1/pinjaman/tambah", HttpMethod.POST, entity, String.class).getBody();
+            //ini link yg bisa (dari kelompok besar lain): https://sikoperasi-d-6.herokuapp.com/api/v1/pinjaman
+            //ini link yg gabisa dari kelompok besar kita: https://c-5-si-koperasi.herokuapp.com/api/v1/pinjaman/tambah
 
             Gson gson = new Gson();
             JsonParser parser = new JsonParser();
