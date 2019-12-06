@@ -15,6 +15,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.time.LocalDate;
 import java.util.List;
 
 @Controller
@@ -44,8 +45,11 @@ public class LowonganController {
     }
 
     @RequestMapping(path = "/lowongan/add", method = RequestMethod.POST)
-    public String addJenisSubmit(@ModelAttribute LowonganModel lowonganModel, Model model, @RequestParam("idJenis") String idJenisBaru) {
+    public String addJenisSubmit(Authentication authentication, @ModelAttribute LowonganModel lowonganModel, Model model, @RequestParam("idJenis") String idJenisBaru) {
         lowonganModel.setIdJenis(Long.valueOf(idJenisBaru));
+        UserModel user = userService.getUser(authentication.getName());
+
+        lowonganModel.setUuidUser(user.getId());
         lowonganService.addLowongan(lowonganModel);
         model.addAttribute("judulLowongan", lowonganModel.getJudul());
         return "lowongan/add-lowongan";
@@ -65,9 +69,23 @@ public class LowonganController {
     @RequestMapping(value = "/lowongan/ubah-jumlah/{idLowongan}", method = RequestMethod.POST)
     public String changeRestoranFormSubmit(@PathVariable Long idLowongan, @ModelAttribute LowonganModel lowongan,
                                            Model model) {
-        lowonganService.changeJumlahLowongan(idLowongan, lowongan.getJumlah());
-//        model.addAttribute("lowongan", lowongan);
+        LocalDate tanggalBuka = lowongan.getTanggalDibuka();
+//        String[] tglBukaList = tanggalBuka.toString().split("-");
+
+        LocalDate dateNow = LocalDate.now();
+//        String[] dateStr = dateNow.toString().split("-");
+
         List<LowonganModel> allLowongan = lowonganService.findAllLowongan();
+
+
+        if (dateNow.compareTo(tanggalBuka) > 0 || dateNow.compareTo(tanggalBuka) == 0){
+            System.out.println("failed abka");
+            lowonganService.changeJumlahLowongan(idLowongan, lowongan.getJumlah());
+//        model.addAttribute("lowongan", lowongan);
+            model.addAttribute("listLowongan", allLowongan);
+            return "lowongan/ubah-jumlah-lowongan-failed";
+        }
+        System.out.println("babibubebibeioabduaeodbadbaoubdabambanggggg berhasil abka");
         model.addAttribute("listLowongan", allLowongan);
         return "lowongan/ubah-jumlah-lowongan";
     }
