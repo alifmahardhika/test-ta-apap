@@ -17,33 +17,34 @@
                     <div class="card">
                         <div class="card-header">Daftar Jenis Surat</div>
                         <div class="card-body">
-					                <table class="table table-striped" id="myTable">
-					                    <thead>
-					                        <tr>
-					                        	<th>No</th>
-					                            <th>Nama</th>
-					                            <th>Keterangan</th>
-					                            <th>Action<th/>
-					                        </tr>
-					                    </thead>
-					                    <tbody>
-					                        <tr th:each="jenisSurat, iterationStatus : *{jenisSuratList}" th:style="${iterationStatus.even} ? 'color: blue'">
-					                            <td th:text="${iterationStatus.count}"></td>
-					                            <td th:text="${jenisSurat.nama}"></td>
-					                            <td th:text="${jenisSurat.keterangan}"></td>
-					                          	<td>
-					                          	<div class="form-row col-lg-8">
-					                        		<form class="form-group col-md-3" th:action="@{/jenis-surat/delete/}+${jenisSurat.idJenisSurat}">
-					                        			<button class="btn btn-large btn-danger">Hapus</button>
-					                        		</form>
-					                        	</div>
-					                        	</td>
-					                        	
-					                        </tr>
-					                    </tbody>
-
-					                </table>
-					                <a th:href="@{/jenis-surat/add}" class="btn btn-large btn-dark" style="float:right">Tambah Jenis Surat</a>
+							<table class="table" id="myTable">
+								<thead>
+									<tr>
+										<th scope="col">No</th>
+										<th scope="col">Nama</th>
+										<th scope="col">Keterangan</th>
+										<th scope="col">Action<th/>
+									</tr>
+								</thead>
+								<tbody>
+									<tr th:each="jenisSurat, iterationStatus : *{jenisSuratList}">
+										<td th:text="${iterationStatus.count}"></td>
+										<td th:text="${jenisSurat.nama}"></td>
+										<td th:text="${jenisSurat.keterangan}"></td>
+										<td>
+										<div class="" th:if="${user.getRole().getNama() == 'Admin TU'}">
+											<form class="form-group" th:action="@{/jenis-surat/delete/}+${jenisSurat.idJenisSurat}">
+												<button class="btn btn-large btn-danger">Hapus</button>
+											</form>
+										</div >
+										<div th:unless="${user.getRole().getNama() == 'Admin TU'}">
+											<p>-</p>
+										</div>
+										</td>
+									</tr>
+								</tbody>
+							</table>
+							<!--<a th:href="@{/jenis-surat/add}" class="btn btn-large btn-dark" style="float:right">Tambah Jenis Surat</a>-->
 					        </div>
                         </div>
                     </div>
@@ -53,4 +54,5 @@
         </div>
     <br>
     </body>
+	<footer th:replace="fragments/fragment :: footer"></footer>
 </html>

@@ -10,51 +10,52 @@
 <nav th:replace="fragments/fragment :: navbar"></nav>
 
 <div class="container-fluid">
-    <br>
     <div class="row">
         <div class="col-md-12">
             <div class="card">
-                <div class="card-header">Daftar Jenis Surat</div>
+                <div class="card-header">Daftar Jenis Lowongan</div>
                 <div class="card-body">
-                    <table class="table table-striped" id="myTable">
+                    <table class="table" id="myTable">
                         <thead>
                         <tr>
-                            <th>No</th>
-                            <th>Nama</th>
-                            <th>Id Jenis</th>
-                            <th>Keterangan<th/>
+                            <th scope="col">No</th>
+                            <th scope="col">Nama</th>
+                            <th scope="col">Id Jenis</th>
+                            <th scope="col">Keterangan<th/>
+                            <th scope="col"><th/>
                         </tr>
                         </thead>
                         <tbody>
-                        <tr th:each="jenisSurat, iterationStatus : *{jenisSuratList}" th:style="${iterationStatus.even} ? 'color: blue'">
+
+                        <tr th:object="${jenis}" th:each="jenis, iterationStatus : *{listJenis }">
                             <td th:text="${iterationStatus.count}"></td>
-                            <td th:text="${jenisSurat.nama}"></td>
-                            <td th:text="${jenisSurat.keterangan}"></td>
-                            <td>
-                                <div class="form-row col-lg-8">
-                                    <a th:href="@{/jenis-lowongan/delete/} + ${jenis.idJenis}">
-                                        <button type="button" class="btn btn-sm btn-secondary">Delete Jenis</button>
-                                    </a>
+                            <td th:text="${jenis.nama}" th:value="${jenis.nama}" ></td>
+                            <td th:text="${jenis.idJenis}"></td>
+                            <td th:text="${jenis.keterangan}"></td>
+                            <td style="white-space: nowrap;">
+                                <div class="row" style="width:100%">
+
+                                    <div class="form-row">
+                                        <a th:href="@{/jenis-lowongan/delete/} + ${jenis.idJenis}">
+                                            <button type="button" class="btn btn-sm btn-warning">Hapus</button>
+                                        </a>
+                                    </div>
+
                                 </div>
                             </td>
-
                         </tr>
-
-
-
                         </tbody>
-
                     </table>
-                    <a th:href="@{/jenis-surat/add}" class="btn btn-large btn-dark" style="float:right">Tambah Jenis Surat</a>
+
+                    <a th:href="@{/jenis-surat/add}" class="btn btn-large btn-dark" style="float:right">Tambah Jenis Lowongan</a>
                 </div>
             </div>
         </div>
     </div>
 </div>
-<br>
 </div>
-<br>
 </body>
+<footer th:replace="fragments/fragment :: footer"></footer>
 </html>
 
 
@@ -62,43 +63,3 @@
 
 
 
-
-
-<!DOCTYPE html>
-<html xmlns:th="http://thymeLeaf.org">
-<head>
-
-    <object th:include="fragments/fragment :: css" th:remove="tag"></object>
-    <object th:include="fragments/fragment :: js" th:remove="tag"></object>
-
-</head>
-<body>
-<!--(pageTitle='Add Jenis Lowongan')-->
-<nav th:replace="fragments/fragment :: navbar"></nav>
-<br>
-
-<br>
-<div class="card-header bg bg-dark">
-    <p style="color: white; size: 12px;">Daftar Jenis</p>
-</div>
-
-
-<div class="container-fluid" align="center">
-    <table class="table">
-        <thead>
-        <tr>
-            <th scope="col">No</th>
-            <th scope="col">Nama</th>
-            <th scope="col">Id Jenis</th>
-            <th scope="col">Keterangan</th>
-            <th scope="col"></th>
-
-        </tr>
-        </thead>
-        <tbody>
-        
-        </tbody>
-    </table>
-</div>
-</body>
-</html>
